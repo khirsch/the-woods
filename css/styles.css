@@ -1,5 +1,5 @@
 body {
-  background: url("../img/night-woods.jpg") no-repeat center center fixed;
+  background: url("../img/forest.jpg") no-repeat center center fixed;
   background-size: cover;
   padding: 100px;
 }
@@ -8,6 +8,7 @@ h1 {
   text-align: center;
   margin-top: 50px;
   font-size: 70px;
+  font-family: 'Bungee Outline';
   font-weight: bold;
 }
 
@@ -27,6 +28,9 @@ img {
 .btn {
   display: block;
   margin: auto;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 
 .container {
@@ -37,6 +41,7 @@ img {
   background-color: #ffffff;
   color: #000000;
   border-radius: 25px;
+  opacity: 0.8;
 }
 
 .title {
