@@ -2,27 +2,40 @@ body {
   background: url("../img/forest.jpg") no-repeat center center fixed;
   background-size: cover;
   padding: 100px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  color: #000000;
 }
 
 h1 {
   text-align: center;
-  margin-top: 50px;
   font-size: 70px;
-  font-family: 'Bungee Outline';
+  font-family: 'Bungee Shade';
+  font-weight: bold;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 0 !important;
   font-weight: bold;
 }
 
 h4 {
   text-align: center;
-  margin-bottom: 30px;
+  font-weight: bold;
 }
 
 ul {
   list-style: none;
 }
 
-img {
+li {
+  font-weight: bold;
+}
 
+li:hover {
+  color: #718059;
 }
 
 .btn {
@@ -31,30 +44,109 @@ img {
   color: #000000;
   background-color: #ffffff;
   border: 1px solid #000000;
+  font-weight: bold;
+}
+
+.btn:hover {
+  color: #000000;
+  -webkit-animation: swing 1s ease;
+  animation: swing 1s ease;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
 }
 
 .container {
   display: block;
   margin: 0 auto;
+  padding: 30px;
   width: 60%;
-  height: 500px;
   background-color: #ffffff;
   color: #000000;
   border-radius: 25px;
   opacity: 0.8;
 }
 
-.title {
-  /*display: none;*/
-}
-
 .story {
   display: none;
 }
 
-#title-img {
+#titleImg {
   display: block;
   margin: auto;
   width: 30%;
   margin-bottom: 30px;
+}
+
+#storyImg {
+  display: block;
+  margin: auto;
+  width: 20%;
+}
+
+
+@-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
 }
