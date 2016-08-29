@@ -25,40 +25,37 @@ function Book (pages) {
 }
 
 Book.prototype.loadPage = function(option) {
+  var outcome = eval(option.test);
   if(option.gameOver === true) {
     this.gameOver = true;
   }
-  var outcome = eval(option.test);
-  if(outcome && option.healthPass) {
-    this.player.health += option.healthPass;
-    if(this.player.health <= 0) {
-      this.player.alive = false;
-      this.gameOver = true;
+  if (outcome) {
+    if(option.healthPass) {
+      this.player.health += option.healthPass;
     }
-  } else if(!outcome && option.healthFail) {
-      this.player.health += option.healthFail;
-      if(this.player.health <= 0) {
-        this.player.alive = false;
-        this.gameOver = true;
-      }
-    }
-  if (this.gameOver) {
-    if (!this.player.alive) {
-      this.currentPage = this.pages[2];
-    } else {
-      this.currentPage = this.pages[4];
-    }
-    this.reset();
-  } else if (outcome) {
-    this.currentPage = this.pages[option.nextPass];
     if(option.itemPass) {
       this.player.inv.push(option.itemPass);
     }
   } else {
-    this.currentPage = this.pages[option.nextFail];
+    if(option.healthFail) {
+      this.player.health += option.healthFail;
+    }
     if(option.itemFail) {
       this.player.inv.push(option.itemFail);
     }
+  }
+  if (this.player.health <= 0) {
+    this.player.alive = false;
+    this.gameOver = true;
+    this.currentPage = this.pages[2];
+    this.reset();
+  } else if (this.gameOver && this.player.alive) {
+    this.currentPage = this.pages[4];
+    this.reset();
+  } else if (outcome) {
+    this.currentPage = this.pages[option.nextPass];
+  } else {
+    this.currentPage = this.pages[option.nextFail];
   }
 }
 
