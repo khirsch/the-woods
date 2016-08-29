@@ -1,0 +1,55 @@
+body {
+  background: url("../img/night-woods.jpg") no-repeat center center fixed;
+  background-size: cover;
+  padding: 100px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 70px;
+  font-weight: bold;
+}
+
+h4 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+
+}
+
+.btn {
+  display: block;
+  margin: auto;
+}
+
+.container {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  height: 500px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 25px;
+}
+
+.title {
+  /*display: none;*/
+}
+
+.story {
+  display: none;
+}
+
+#title-img {
+  display: block;
+  margin: auto;
+  width: 30%;
+  margin-bottom: 30px;
+}
