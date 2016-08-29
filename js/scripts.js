@@ -1,11 +1,13 @@
+// Back end logic
 function Player () {
   this.alive = true;
 }
 
-function Page (number, subtitle, prompt, options) {
+function Page (number, subtitle, prompt, img, options) {
   this.number = number;
   this.subtitle = subtitle;
   this.prompt = prompt;
+  this.img = img;
   this.options = options;
 }
 
@@ -27,39 +29,56 @@ var pages = [];
 pages.push(new Page(0,
   "subtitle",
   "Your camp has been overrun by a bear!",
+  "",
   [{text: "Run away!", num: 1}, {text: "Play dead.", num: 2}]
 ));
 pages.push(new Page(1,
   "subtitle",
   "You lose your sense of direction and get lost!",
+  "",
   [{text: "Go back to camp.", num: 2}, {text: "Look for a new shelter.", num: 4}]
 ));
 pages.push(new Page(2,
   "YOU DIED!",
   "You have been mauled by a bear.",
+  "",
   [{text: "Try again?", num: 0}]
 ));
 pages.push(new Page(4,
   "subtitle",
   "Make for cave or build your own shelter?",
+  "",
   [{text: "Cave", num: 2}, {text: "Build", num:5}]
 ));
 pages.push(new page(5,
   "YOU WIN!!!!",
   "You have survived the night and lived to find help in the morning.",
+  "",
   [{text: "Play again?", num: 0}]
 ));
 var book = new Book(pages);
 
-
-//psuedo code below
-// click on the radio button {
-//   var next = parseInt(option.val());
-//   book.loadPage(next);
-//   $('#text').text(book.currentPage.text);
-//   update options
-//
-// }
-// book.currentPage.options.forEach(function(option {
-//   "<option value =" option.num ">" option.text "</option>"
-// })
+// Front end logic
+$(document).ready(function() {
+  $('#start').click(function() {
+    $('#main').hide();
+    $('.story').show();
+    $('#subtitle').text(book.currentPage.subtitle);
+    $('#prompt').text(book.currentPage.prompt);
+    $('#li0').attr("value", book.currentPage.options[0].num);
+    $('#li0').text(book.currentPage.options[0].text);
+    $('#li1').attr("value", book.currentPage.options[1].num);
+    $('#li1').text(book.currentPage.options[1].text);
+  });
+  $('li').click(function() {
+    var next = parseInt($(this).val());
+    book.loadPage(next);
+    $('#subtitle').text(book.currentPage.subtitle);
+    $('#prompt').text(book.currentPage.prompt);
+    $('#options').empty();
+    $('#li0').attr("value", book.currentPage.options[0].num);
+    $('#li0').text(book.currentPage.options[0].text);
+    $('#li1').attr("value", book.currentPage.options[1].num);
+    $('#li1').text(book.currentPage.options[1].text);
+  });
+});
