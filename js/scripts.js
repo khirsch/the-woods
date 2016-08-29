@@ -6,7 +6,7 @@ function Player () {
 }
 
 Player.prototype.invContains = function(item) {
-  return this.inv.indexOf(item) >== 0;
+  return this.inv.indexOf(item) >= 0;
 }
 
 function Page (number, subtitle, prompt, img, options) {
@@ -68,7 +68,7 @@ var pages = [];
 pages.push(new Page(0,
   "subtitle",
   "Your camp has been overrun by zombies!",
-  "img/zombie.svg",
+  "img/page-icons/zombie.svg",
   [{text: "Run away!", nextPass: 1, test: "true", health: -5},
   {text: "Play dead.", nextPass: 2, test: "true", health: -100}]
 ));
@@ -112,13 +112,13 @@ pages.push(new Page(6,
   [{text: "You are tired from running and go to sleep.", nextPass: 8, test: "true"},
   {text: "Afraid there may be more vampires, you look deeper in the cave.", nextPass: 9, test: "true"}]
 ));
-pages.push(new Page(7,
-  "subtitle",
-  "Befriend vampire. Get amulet.",
-  "",
-  [{text: "", nextPass: , nextFail: , test: ""},
-  {text: "", nextPass: , test: ""}]
-));
+// pages.push(new Page(7,
+//   "subtitle",
+//   "Befriend vampire. Get amulet.",
+//   "",
+//   [{text: "", nextPass: , nextFail: , test: ""},
+//   {text: "", nextPass: , test: ""}]
+// ));
 // pages.push(new Page(7,
 //   "subtitle",
 //   "",
