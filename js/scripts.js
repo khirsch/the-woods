@@ -5,6 +5,10 @@ function Player () {
   this.inv = [];
 }
 
+Player.prototype.invContains = function(item) {
+  return this.inv.indexOf(item) >== 0;
+}
+
 function Page (number, subtitle, prompt, img, options) {
   this.number = number;
   this.subtitle = subtitle;
@@ -101,7 +105,7 @@ pages.push(new Page(5,
   "Subtitle",
   "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
   "img/page-icons/cave.svg",
-  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.inv.indexOf('axe') >= 0", healthPass: -50, healthFail: -100, itemPass: "amulet"},
+  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -100, itemPass: "amulet"},
   {text: "Try to befriend her.", nextPass: 7, test: "true", itemPass: "amulet"}]
 ));
 pages.push(new Page(6,
@@ -110,6 +114,13 @@ pages.push(new Page(6,
   "",
   [{text: "You are tired from running and go to sleep.", nextPass: 8, test: "true"},
   {text: "Afraid there may be more vampires, you look deeper in the cave.", nextPass: 9, test: "true"}]
+));
+pages.push(new Page(7,
+  "subtitle",
+  "Befriend vampire. Get amulet.",
+  "",
+  [{text: "", nextPass: , nextFail: , test: ""},
+  {text: "", nextPass: , test: ""}]
 ));
 // pages.push(new Page(7,
 //   "subtitle",
