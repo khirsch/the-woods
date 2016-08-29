@@ -21,7 +21,6 @@ function Book (pages) {
 }
 
 Book.prototype.loadPage = function(option) {
-  console.log(book.player);
   if(option.gameOver === true) {
     this.gameOver = true;
   }
@@ -52,10 +51,6 @@ Book.prototype.loadPage = function(option) {
 Book.prototype.reset = function() {
   this.player = new Player();
   this.gameOver = false;
-}
-
-Book.prototype.playerDies = function() {
-  this.currentPage = this.pages[2]; // 2 - death page
 }
 
 var pages = [];
@@ -110,7 +105,6 @@ $(document).ready(function() {
     changePage();
   });
   $('li').click(function() {
-    // var next = parseInt($(this).val());
     var optionNum = $(this).attr('id').charAt(6);
     var option = book.currentPage.options[optionNum];
     book.loadPage(option);
