@@ -6,14 +6,22 @@ body {
 
 h1 {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 50px;
   font-size: 70px;
   font-weight: bold;
 }
 
 h4 {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+
 }
 
 .btn {
@@ -29,4 +37,19 @@ h4 {
   background-color: #ffffff;
   color: #000000;
   border-radius: 25px;
+}
+
+.title {
+  /*display: none;*/
+}
+
+.story {
+  display: none;
+}
+
+#title-img {
+  display: block;
+  margin: auto;
+  width: 30%;
+  margin-bottom: 30px;
 }
