@@ -28,8 +28,8 @@ Book.prototype.playerDies = function() {
 var pages = [];
 pages.push(new Page(0,
   "subtitle",
-  "Your camp has been overrun by a bear!",
-  "",
+  "Your camp has been overrun by zombies!",
+  "img/zombie.svg",
   [{text: "Run away!", num: 1}, {text: "Play dead.", num: 2}]
 ));
 pages.push(new Page(1,
@@ -60,28 +60,25 @@ var book = new Book(pages);
 
 // Front end logic
 $(document).ready(function() {
-  $('#start').click(function() {
-    $('.title').hide();
-    $('.story').show();
+  function changePage() {
     $('#subtitle').text(book.currentPage.subtitle);
     $('#prompt').text(book.currentPage.prompt);
+    $('#storyImg').attr("src", book.currentPage.img);
     $('li').hide();
     book.currentPage.options.forEach(function(option, i) {
       $('#option' + i).show();
       $('#option' + i).attr("value", book.currentPage.options[i].num);
       $('#option' + i).text(book.currentPage.options[i].text);
     });
+  }
+  $('#start').click(function() {
+    $('.title').hide();
+    $('.story').show();
+    changePage();
   });
   $('li').click(function() {
     var next = parseInt($(this).val());
     book.loadPage(next);
-    $('#subtitle').text(book.currentPage.subtitle);
-    $('#prompt').text(book.currentPage.prompt);
-    $('li').hide();
-    book.currentPage.options.forEach(function(option, i) {
-      $('#option' + i).show();
-      $('#option' + i).attr("value", book.currentPage.options[i].num);
-      $('#option' + i).text(book.currentPage.options[i].text);
-    });
+    changePage();
   });
 });
