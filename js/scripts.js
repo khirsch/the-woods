@@ -50,7 +50,7 @@ pages.push(new Page(4,
   "",
   [{text: "Cave", num: 2}, {text: "Build", num:5}]
 ));
-pages.push(new page(5,
+pages.push(new Page(5,
   "YOU WIN!!!!",
   "You have survived the night and lived to find help in the morning.",
   "",
@@ -61,24 +61,27 @@ var book = new Book(pages);
 // Front end logic
 $(document).ready(function() {
   $('#start').click(function() {
-    $('#main').hide();
+    $('.title').hide();
     $('.story').show();
     $('#subtitle').text(book.currentPage.subtitle);
     $('#prompt').text(book.currentPage.prompt);
-    $('#li0').attr("value", book.currentPage.options[0].num);
-    $('#li0').text(book.currentPage.options[0].text);
-    $('#li1').attr("value", book.currentPage.options[1].num);
-    $('#li1').text(book.currentPage.options[1].text);
+    $('li').hide();
+    book.currentPage.options.forEach(function(option, i) {
+      $('#option' + i).show();
+      $('#option' + i).attr("value", book.currentPage.options[i].num);
+      $('#option' + i).text(book.currentPage.options[i].text);
+    });
   });
   $('li').click(function() {
     var next = parseInt($(this).val());
     book.loadPage(next);
     $('#subtitle').text(book.currentPage.subtitle);
     $('#prompt').text(book.currentPage.prompt);
-    $('#options').empty();
-    $('#li0').attr("value", book.currentPage.options[0].num);
-    $('#li0').text(book.currentPage.options[0].text);
-    $('#li1').attr("value", book.currentPage.options[1].num);
-    $('#li1').text(book.currentPage.options[1].text);
+    $('li').hide();
+    book.currentPage.options.forEach(function(option, i) {
+      $('#option' + i).show();
+      $('#option' + i).attr("value", book.currentPage.options[i].num);
+      $('#option' + i).text(book.currentPage.options[i].text);
+    });
   });
 });
