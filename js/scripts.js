@@ -24,13 +24,20 @@ Book.prototype.loadPage = function(option) {
   if(option.gameOver === true) {
     this.gameOver = true;
   }
-  if(option.health) {
-    this.player.health += option.health;
+  var outcome = eval(option.test);
+  if(outcome && option.healthPass) {
+    this.player.health += option.healthPass;
     if(this.player.health <= 0) {
       this.player.alive = false;
       this.gameOver = true;
     }
-  }
+  } else if(!outcome && option.healthFail) {
+      this.player.health += option.healthFail;
+      if(this.player.health <= 0) {
+        this.player.alive = false;
+        this.gameOver = true;
+      }
+    }
   if (this.gameOver) {
     if (!this.player.alive) {
       this.currentPage = this.pages[2];
@@ -38,13 +45,16 @@ Book.prototype.loadPage = function(option) {
       this.currentPage = this.pages[4];
     }
     this.reset();
-  } else if (eval(option.test)) {
+  } else if (outcome) {
     this.currentPage = this.pages[option.nextPass];
-    if(option.item) {
-      this.player.inv.push(option.item);
+    if(option.itemPass) {
+      this.player.inv.push(option.itemPass);
     }
   } else {
     this.currentPage = this.pages[option.nextFail];
+    if(option.itemFail) {
+      this.player.inv.push(option.itemFail);
+    }
   }
 }
 
@@ -56,34 +66,58 @@ Book.prototype.reset = function() {
 var pages = [];
 pages.push(new Page(0,
   "subtitle",
-  "Your camp has been overrun by zombies! AXEEEE",
+  "Your camp has been overrun by zombies!",
   "img/zombie.svg",
-  [{text: "Run away!", nextPass: 1, test: "true", item: "axe", health: -5}, {text: "Play dead.", nextPass: 2, test: "true", health: -100}]
+  [{text: "Run away!", nextPass: 1, test: "true", health: -5},
+  {text: "Play dead.", nextPass: 2, test: "true", health: -100}]
 ));
 pages.push(new Page(1,
   "subtitle",
   "You lose your sense of direction and get lost!",
   "",
-  [{text: "Go back to camp.", nextPass: 2, test: "true", health: -100}, {text: "Look for a new shelter.", nextPass: 3, test: "true"}]
+  [{text: "Go back to camp.", test: "false", healthFail: -100},
+  {text: "Look for a new shelter.", nextPass: 3, test: "true"}]
 ));
 pages.push(new Page(2,
   "YOU DIED!",
-  "You have been mauled by a bear.",
-  "img/rip.svg",
+  "The dark forest proved to be more than you could handle.",
+  "img/page-icons/rip.svg",
   [{text: "Try again?", nextPass: 0, test: "true"}]
 ));
 pages.push(new Page(3,
   "subtitle",
   "Make for cave or build your own shelter?",
   "",
-  [{text: "Cave", nextPass: 2, test: "true", health: -100}, {text: "Build", nextPass:4, test: "true", gameOver: true}]
+  [{text: "Cave", nextPass: 5, test: "true"},
+  {text: "Build", nextPass: 4, test: "true", gameOver: true}]
 ));
 pages.push(new Page(4,
   "YOU WIN!!!!",
   "You have survived the night and lived to find help in the morning.",
-  "img/fire.svg",
+  "img/page-icons/fire.svg",
   [{text: "Play again?", nextPass: 0, test: "true"}]
 ));
+pages.push(new Page(5,
+  "Subtitle",
+  "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
+  "img/page-icons/cave.svg",
+  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.inv.indexOf('axe') >= 0", healthPass: -50, healthFail: -100, itemPass: "amulet"},
+  {text: "Try to befriend her.", nextPass: 7, test: "true", itemPass: "amulet"}]
+));
+pages.push(new Page(6,
+  "subtitle",
+  "You killed the vampire! You take a shiny amulet from around her neck, thinking it looks valuable.",
+  "",
+  [{text: "You are tired from running and go to sleep.", nextPass: 8, test: "true"},
+  {text: "Afraid there may be more vampires, you look deeper in the cave.", nextPass: 9, test: "true"}]
+));
+// pages.push(new Page(7,
+//   "subtitle",
+//   "",
+//   "",
+//   [{text: "", nextPass: , nextFail: , test: ""},
+//   {text: "", nextPass: , test: "", item: ""}]
+// ));
 var book = new Book(pages);
 
 // Front end logic
