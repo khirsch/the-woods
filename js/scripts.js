@@ -96,7 +96,7 @@ Book.prototype.loadPage = function(option) {
   if (this.player.health <= 0 && nextPage.gameOverPage) {
     this.currentPage = nextPage;
   } else if (this.player.health <= 0) {
-    this.currentPage = this.pages[2];
+    this.currentPage = this.pages[32];
   } else {
     this.currentPage = nextPage;
   }
@@ -294,111 +294,118 @@ function setPages() {
     [{text: "keep exploring", nextPass: 12}]
   ));
   pages.push(new Page(17,
-    "subtitle",
-    "Vampire gives you a shiny amulet from around her neck. It looks valuable.",
+    "Vampire Encounter",
+    "The vampire senses your despiration. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance.",
     "img/page-icons/vampire.svg",
     false,
-    [{text: "leave the cave", nextPass: 10}]
+    [{text: "Leave the cave.", nextPass: 10}]
   ));
   pages.push(new Page(18,
-    "subtitle",
-    "You found a mushroom",
+    "The Cave",
+    "You run deeper into the cave and you come to a dead end. On the ground below you, you find a patch of mushrooms. You pick one up to examine it.",
     "img/page-icons/cave.svg",
     false,
-    [{text: "leave the cave", nextPass: 10},
-    {text: "eat the mushroom", nextPass: 26, healthPass: -1000, itemRemovePass: ["mushroom"]}]
+    [{text: "Place the mushroom in your pocket, and leave the cave.", nextPass: 10},
+    {text: "Eat the mushroom.", nextPass: 26, healthPass: -1000, itemRemovePass: ["mushroom"]}]
   ));
   pages.push(new Page(19,
-    "subtitle",
-    "You get stuck in a bear trap",
+    "The Woods",
+    "Stumbling from fear, you continue deeper into the forest. In your haste to get away, you fall into a bear trap.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "use knife to free self from bear trap", display: "book.player.invContains('knife')", nextPass: 23},
-    {text: "wait for someone to find you", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
+    [{text: "Use your knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
+    {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
   ));
   pages.push(new Page(20,
-    "subtitle",
-    "the mushroom turned out to be poisoned! the man dies, you see a knife at his side",
+    "The Mysterious Stranger",
+    "The mysterious stranger eats your mushroom. The mushroom turned out to be poisoned! The mysterious stranger dies. You see a knife at his side",
     "img/page-icons/person.svg",
     false,
-    [{text: "take knife", itemPass: ["knife"], nextPass: 19}]
+    [{text: "Take the knife.", itemPass: ["knife"], nextPass: 19}]
   ));
   pages.push(new Page(21,
-    "subtitle",
-    "you used the axe to kill the stranger. you take his knife",
+    "The Mysterious Stranger",
+    "You use the axe to kill the mysterious stranger. You see a knife by his side.",
     "img/page-icons/person.svg",
     false,
-    [{text: "keep exploring", nextPass: 19}]
+    [{text: "Take the knife.", nextPass: 19}]
   ));
   pages.push(new Page(22,
-    "subtitle",
-    "you fight the stranger with your bear hands. you barely manage to get away.",
+    "The Mysterious Stranger",
+    "You fight the stranger with your bare hands. He pulls out a knife and swings wildly. You barely manage to get away.",
     "img/page-icons/person.svg",
     false,
-    [{text: "keep exploring", nextPass: 19}]
+    [{text: "Keep running.", nextPass: 19}]
   ));
   pages.push(new Page(23,
-    "subtitle",
-    "you use the knife to free yourself from the bear trap. exhausted, you see an exit from the forest.",
+    "The Woods",
+    "You use the knife to free yourself from the bear trap. Exhausted, you see an exit from the forest.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "stuble out of forest", nextPass: 4}]
+    [{text: "Stumble out of forest.", nextPass: 4}]
   ));
   pages.push(new Page(24,
-    "subtitle",
-    "Wrong answer! Owl attacks you.",
+    "Owl Encounter",
+    "Wrong answer! The owl is enraged and attacks you with his sharp talons. Feathers are flying everywhere.",
     "img/page-icons/owl.svg",
     false,
-    [{text: "run away", display: "true", nextPass: 10}]
+    [{text: "Run away from the owl.", display: "true", nextPass: 10}]
   ));
   pages.push(new Page(25,
-    "subtitle",
-    "You barely escape the zombies",
+    "Zombie Attack",
+    "You have nothing to fight off the zombies with, but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life",
     "img/page-icons/woods.svg",
     false,
-    [{text: "keep running", nextPass: 12}]
+    [{text: "Keep running.", nextPass: 12}]
   ));
   pages.push(new Page(26,
     "YOU DIED!",
-    "You ate the mushroom. It was poisoned. You died.",
+    "Oh no! The mushroom turned out to be poisoned. You died.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(27,
     "YOU DIED!",
-    "zombies still at camp. they ate you.",
+    "The zombies are still at the camp eating your friends. There are too many of them and you can't escape. They eat you.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(28,
-    "subtitle",
+    "Ghost Attack",
     "you were attacked by a ghost.",
     "img/page-icons/ghost.svg",
     true,
-    [{text: "run away", nextPass: 10}]
+    [{text: "Run away, again.", nextPass: 10}]
   ));
   pages.push(new Page(29,
     "YOU DIED!",
-    "No one found you.",
+    "The zombies caught up with you before anyone came to help.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
-    "Someone found you and saved you.",
+    "Your prayers were answered, and a park ranger patrolling the forest found you and saved you.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(31,
-    "subtitle",
-    "The gnome took an item!",
+    "Gnome Encounter",
+    "The gnome ran away as quickly as it appeared. You glance at your bag and notice something is missing. The gnome took an item!",
     "img/page-icons/sunrise.svg",
     false,
-    [{text: "Keep exploring", nextPass: 12}]
+    [{text: "Keep exploring the woods.", nextPass: 12}]
+  ));
+  pages.push(new Page(32,
+    "YOU DIED!",
+    "The dark forest proved to be more than you could handle.",
+    "img/page-icons/rip.svg",
+    true,
+    [{text: "Try again?", nextPass: 0, reset: 'true'}]
   ));
   return pages;
 }
