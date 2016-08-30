@@ -80,8 +80,12 @@ li:hover {
   display: none;
 }
 
+.item {
+  display: none;
+}
+
 .itemImg {
-  width: 40px;
+  width: 32px;
   display: block;
   margin: auto;
 }
@@ -102,6 +106,7 @@ li:hover {
 
 #healthbar {
   background-color: #718059;
+  width: 100%;
 }
 
 #titleImg {
@@ -116,7 +121,6 @@ li:hover {
   margin: auto;
   width: 20%;
 }
-
 
 @-webkit-keyframes swing
 {
@@ -183,11 +187,4 @@ li:hover {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
-}
-#healthbar {
-  width: 100%;
-}
-
-.item {
-  display: none;
 }
