@@ -113,9 +113,9 @@ pages.push(new Page(0,
 pages.push(new Page(1,
   "subtitle",
   "You lose your sense of direction and get lost!",
-  "",
+  "img/page-icons/woods.svg",
   false,
-  [{text: "Go back to camp.", nextPass: 7, nextFail: 2, test: "Math.random() > 0.5", healthFail: -1000},
+  [{text: "Go back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
   {text: "Keep running.", nextPass: 3}]
 ));
 pages.push(new Page(2,
@@ -128,7 +128,7 @@ pages.push(new Page(2,
 pages.push(new Page(3,
   "subtitle",
   "Make for cave or make a fire?",
-  "",
+  "img/page-icons/woods.svg",
   false,
   [{text: "Cave", nextPass: 5},
   {text: "Fire", nextPass: 10}]
@@ -136,7 +136,7 @@ pages.push(new Page(3,
 pages.push(new Page(4,
   "YOU SURVIVED!",
   "You have survived the night and lived to find help in the morning.",
-  "img/page-icons/fire.svg",
+  "img/page-icons/sunrise.svg",
   false,
   [{text: "Play again?", nextPass: 0, reset: 'true'}]
 ));
@@ -145,13 +145,13 @@ pages.push(new Page(5,
   "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
   "img/page-icons/cave.svg",
   false,
-  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000, itemPass: ["amulet"]},
+  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
   {text: "Try to befriend her.", nextPass: 17, itemPass: ["amulet"]}]
 ));
 pages.push(new Page(6,
   "subtitle",
-  "You killed the vampire! You take a shiny amulet from around her neck, thinking it looks valuable.",
-  "",
+  "You killed the vampire!",
+  "img/page-icons/vampire.svg",
   false,
   [{text: "Keep exploring the cave.", nextPass: 18, itemPass: ["mushroom"]},
   {text: "Afraid there may be more vampires, you leave the cave.", nextPass: 12}]
@@ -159,43 +159,43 @@ pages.push(new Page(6,
 pages.push(new Page(7,
   "subtitle",
   "You made it back to camp and found an axe",
-  "",
+  "img/page-icons/axe.svg",
   false,
   [{text: "pick up the axe", nextPass: 3, itemPass: ["axe"]}]
 ));
 pages.push(new Page(8,
   "subtitle",
   "You meet an owl (Riddle)",
-  "",
+  "img/page-icons/owl.svg",
   false,
   [{text: "answer1", nextPass: 11, itemPass: ["hat"]},
   {text: "answer2", nextPass: 24, healthPass: -40}]
 ));
 pages.push(new Page(9,
   "subtitle",
-  "Abandoned hunting lodge - find compass/water, but then get attacked by a ghost",
-  "",
+  "Abandoned hunting lodge - find compass/water",
+  "img/page-icons/lodge.svg",
   false,
-  [{text: "run away", nextPass: 12, itemPass: ["compass", "water"], healthPass: -20}]
+  [{text: "explore the lodge", nextPass: 28, healthPass: -20}]
 ));
 pages.push(new Page(10,
   "subtitle",
   "Attacked by zombies",
-  "",
+  "img/page-icons/zombie.svg",
   false,
   [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
 ));
 pages.push(new Page(11,
   "YOU SURVIVED!",
   "You received a magical hat and teleported out of the forest.",
-  "",
+  "img/page-icons/sunrise.svg",
   false,
   [{text: "Play again?", nextPass: 0, reset: 'true'}]
 ));
 pages.push(new Page(12,
   "subtitle",
   "You meet a weird person",
-  "",
+  "img/page-icons/person.svg",
   false,
   [{text: "confront", nextPass: 13},
   {text: "run away", nextPass: 19}]
@@ -203,7 +203,7 @@ pages.push(new Page(12,
 pages.push(new Page(13,
   "subtitle",
   "you confront the stranger",
-  "",
+  "img/page-icons/person.svg",
   false,
   [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"]},
   {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"]},
@@ -212,14 +212,14 @@ pages.push(new Page(13,
 pages.push(new Page(14,
   "subtitle",
   "You gave them water. you got a map",
-  "",
+  "img/page-icons/woods.svg",
   false,
   [{text: "take map", nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
 ));
 pages.push(new Page(15,
   "YOU SURVIVED!",
   "You used map and compass to escape the forest",
-  "",
+  "img/page-icons/sunrise.svg",
   false,
   [{text: "Play again?", nextPass: 0, reset: 'true'}]
 ));
@@ -227,21 +227,21 @@ pages.push(new Page(15,
 pages.push(new Page(16,
   "subtitle",
   "Kill zombies with axe",
-  "",
+  "img/page-icons/zombie.svg",
   false,
-  [{text: "keep exploring", test: "Math.random() > 0.5", nextPass: 8, nextFail: 9}]
+  [{text: "keep exploring", test: "Math.random() > 0.5", nextPass: 8, nextFail: 9, itemFail: ["compass", "water"]}]
 ));
 pages.push(new Page(17,
   "subtitle",
-  "Vampire gives you an amulet",
-  "",
+  "Vampire gives you a shiny amulet from around her neck. It looks valuable.",
+  "img/page-icons/vampire.svg",
   false,
   [{text: "leave the cave", nextPass: 12}]
 ));
 pages.push(new Page(18,
   "subtitle",
   "You found a mushroom",
-  "",
+  "img/page-icons/cave.svg",
   false,
   [{text: "leave the cave", nextPass: 12},
   {text: "eat the mushroom", nextPass: 26, healthPass: -1000}]
@@ -249,59 +249,87 @@ pages.push(new Page(18,
 pages.push(new Page(19,
   "subtitle",
   "You get stuck in a bear trap",
-  "",
+  "img/page-icons/woods.svg",
   false,
   [{text: "use knife to free self from bear trap", display: "book.player.invContains('knife')", nextPass: 23},
-  {text: "wait for someone to find you", nextPass: 2, healthPass: -1000}]
+  {text: "wait for someone to find you", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
 ));
 pages.push(new Page(20,
   "subtitle",
   "the mushroom turned out to be poisoned! the man dies, you take his knife",
-  "",
+  "img/page-icons/person.svg",
   false,
   [{text: "keep exploring", nextPass: 19}]
 ));
 pages.push(new Page(21,
   "subtitle",
   "you used the axe to kill the stranger. you take his knife",
-  "",
+  "img/page-icons/person.svg",
   false,
   [{text: "keep exploring", nextPass: 19}]
 ));
 pages.push(new Page(22,
   "subtitle",
   "you fight the stranger with your bear hands. you barely manage to get away.",
-  "",
+  "img/page-icons/person.svg",
   false,
   [{text: "keep exploring", nextPass: 19}]
 ));
 pages.push(new Page(23,
   "subtitle",
   "you use the knife to free yourself from the bear trap. exhausted, you see an exit from the forest.",
-  "",
+  "img/page-icons/woods.svg",
   false,
   [{text: "stuble out of forest", nextPass: 4}]
 ));
 pages.push(new Page(24,
   "subtitle",
   "Wrong answer! Owl attacks you.",
-  "",
+  "img/page-icons/owl.svg",
   false,
   [{text: "run away", display: "true", nextPass: 12}]
 ));
 pages.push(new Page(25,
   "subtitle",
   "You barely escape the zombies",
-  "",
+  "img/page-icons/woods.svg",
   false,
   [{text: "keep running", nextPass: 12}]
 ));
 pages.push(new Page(26,
-  "subtitle",
+  "YOU DIED!",
   "You ate the mushroom. It was poisoned. You died.",
-  "",
+  "img/page-icons/rip.svg",
   true,
-  [{text: "Play again?", nextPass: 0, reset: true }]
+  [{text: "Play again?", nextPass: 0, reset: true}]
+));
+pages.push(new Page(27,
+  "YOU DIED!",
+  "zombies still at camp. they ate you.",
+  "img/page-icons/rip.svg",
+  true,
+  [{text: "Play again?", nextPass: 0, reset: true}]
+));
+pages.push(new Page(28,
+  "subtitle",
+  "you were attacked by a ghost.",
+  "img/page-icons/ghost.svg",
+  true,
+  [{text: "run away", nextPass: 12}]
+));
+pages.push(new Page(29,
+  "YOU DIED!",
+  "No one found you.",
+  "img/page-icons/rip.svg",
+  true,
+  [{text: "Play again?", nextPass: 0, reset: true}]
+));
+pages.push(new Page(30,
+  "YOU SURVIVED!",
+  "Someone found you and saved you.",
+  "img/page-icons/sunrise.svg",
+  true,
+  [{text: "Play again?", nextPass: 0, reset: true}]
 ));
 var book = new Book(pages);
 
