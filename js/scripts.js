@@ -50,12 +50,20 @@ Book.prototype.loadPage = function(option) {
     if(option.itemPass) {
         this.player.inv = this.player.inv.concat(option.itemPass);
     }
+    if(option.itemRemovePass) {
+      var location = this.player.inv.indexOf(option.itemRemovePass);
+      this.player.inv.splice(location, 1);
+    }
   } else {
     if(option.healthFail) {
       if (book.player.invContains("amulet")) {
         this.player.health += option.healthFail * 0.5;
       } else {
         this.player.health += option.healthFail;
+      }
+      if(option.itemRemoveFail) {
+        var location = this.player.inv.indexOf(option.itemRemoveFail);
+        this.player.inv.splice(location, 1);
       }
     }
     if(option.itemFail) {
@@ -205,8 +213,8 @@ pages.push(new Page(13,
   "you confront the stranger",
   "img/page-icons/person.svg",
   false,
-  [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"]},
-  {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"]},
+  [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"], itemRemovePass: "water"},
+  {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"], itemRemovePass: "mushroom"},
   {text: "fight stranger", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
 ));
 pages.push(new Page(14,
@@ -244,7 +252,7 @@ pages.push(new Page(18,
   "img/page-icons/cave.svg",
   false,
   [{text: "leave the cave", nextPass: 12},
-  {text: "eat the mushroom", nextPass: 26, healthPass: -1000}]
+  {text: "eat the mushroom", nextPass: 26, healthPass: -1000, itemRemovePass: "mushroom"}]
 ));
 pages.push(new Page(19,
   "subtitle",
