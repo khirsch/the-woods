@@ -30,13 +30,10 @@ h6 {
   margin-top: 0 !important;
 }
 
-ul {
-  list-style: none;
-}
-
 li {
   font-style: italic;
   margin-bottom: 5px;
+  list-style: none;
 }
 
 li:hover {
@@ -66,10 +63,9 @@ li:hover {
 
 .container {
   display: block;
-  margin: 10% auto;
+  margin: 15% auto;
   padding: 30px;
   width: 60%;
-  min-width: 600px;
   max-width: 800px;
   background-color: #ffffff;
   color: #000000;
@@ -77,11 +73,7 @@ li:hover {
   opacity: 0.8;
 }
 
-.story {
-  display: none;
-}
-
-.item {
+.story, .item {
   display: none;
 }
 
@@ -188,4 +180,10 @@ li:hover {
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    min-width: 768px;
+  }
 }
