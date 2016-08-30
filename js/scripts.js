@@ -169,7 +169,7 @@ function setPages() {
   ));
 
   var rand;
-  if (Math.random() < 0.8) {
+  if (Math.random() > 0.8) {
     rand = 0;
   } else {
     rand = 1;
