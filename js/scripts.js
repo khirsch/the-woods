@@ -55,12 +55,21 @@ Book.prototype.loadPage = function(option) {
   } else if (this.gameOver && this.player.alive) {
     this.currentPage = this.pages[4];
   } else if (outcome) {
-    this.currentPage = this.pages[option.nextPass];
+    this.currentPage = this.getPage(this.pages[option.nextPass]);
   } else {
-    this.currentPage = this.pages[option.nextFail];
+    this.currentPage = this.getPage(this.pages[option.nextFail]);
   }
 }
-
+Book.prototype.getPage = function(page) {
+  var newOptions = []
+  page.options.forEach(function(option) {
+    if (eval(option.display)) {
+      newOptions.push(option);
+    }
+  });
+  page.options = newOptions;
+  return page
+}
 Book.prototype.reset = function() {
   this.player = new Player();
   this.gameOver = false;
@@ -71,48 +80,107 @@ pages.push(new Page(0,
   "subtitle",
   "Your camp has been overrun by zombies!",
   "img/page-icons/zombie.svg",
-  [{text: "Run away!", nextPass: 1, test: "true", healthPass: -80, itemPass: "axe"},
-  {text: "Play dead.", nextPass: 2, test: "true", healthPass: -100}]
+  [{text: "Run away!", nextPass: 1, test: "true", display: "true"},
+  {text: "Play dead.", nextPass: 2, test: "true", healthPass: -100, display: "true"}]
 ));
 pages.push(new Page(1,
   "subtitle",
   "You lose your sense of direction and get lost!",
   "",
-  [{text: "Go back to camp.", test: "false", healthFail: -100},
-  {text: "Look for a new shelter.", nextPass: 3, test: "true"}]
+  [{text: "Go back to camp.", nextPass: 7, test: "Math.random() > 0.5", healthFail: -100, display: "true"},
+  {text: "Keep running.", nextPass: 3, test: "true", display: "true"}]
 ));
 pages.push(new Page(2,
   "YOU DIED!",
   "The dark forest proved to be more than you could handle.",
   "img/page-icons/rip.svg",
-  [{text: "Try again?", nextPass: 0, test: "true", reset: 'true'}]
+  [{text: "Try again?", nextPass: 0, test: "true", reset: 'true', display: "true"}]
 ));
 pages.push(new Page(3,
   "subtitle",
-  "Make for cave or build your own shelter?",
+  "Make for cave or make a fire?",
   "",
-  [{text: "Cave", nextPass: 5, test: "true"},
-  {text: "Build", nextPass: 4, test: "true", gameOver: true}]
+  [{text: "Cave", nextPass: 5, test: "true", display: "true"},
+  {text: "Fire", nextPass: 10, test: "true", display: "true"}]
 ));
 pages.push(new Page(4,
   "YOU WIN!!!!",
   "You have survived the night and lived to find help in the morning.",
   "img/page-icons/fire.svg",
-  [{text: "Play again?", nextPass: 0, test: "true", reset: 'true'}]
+  [{text: "Play again?", nextPass: 0, test: "true", reset: 'true', display: "true"}]
 ));
 pages.push(new Page(5,
   "Subtitle",
   "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
   "img/page-icons/cave.svg",
-  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -100, itemPass: "amulet"},
-  {text: "Try to befriend her.", nextPass: 7, test: "true", itemPass: "amulet"}]
+  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", display: "true", healthPass: -50, healthFail: -100, itemPass: "amulet"},
+  {text: "Try to befriend her.", nextPass: 17, test: "true", itemPass: "amulet", display: "true"}]
 ));
 pages.push(new Page(6,
   "subtitle",
   "You killed the vampire! You take a shiny amulet from around her neck, thinking it looks valuable.",
   "",
-  [{text: "You are tired from running and go to sleep.", nextPass: 8, test: "true"},
-  {text: "Afraid there may be more vampires, you look deeper in the cave.", nextPass: 9, test: "true"}]
+  [{text: "Keep exploring the cave.", nextPass: 18, test: "true", display: "true"},
+  {text: "Afraid there may be more vampires, you leave the cave.", nextPass: 12, test: "true", display: "true"}]
+));
+pages.push(new Page(7,
+  "subtitle",
+  "You made it back to camp and found an axe",
+  "",
+  [{text: "pick up the axe", nextPass: 3, itemPass: "axe", test: "true", display: "true"}]
+));
+pages.push(new Page(8,
+  "subtitle",
+  "You meet an owl (Riddle)",
+  "",
+  [{text: "answer1", nextPass: 11, test: "true", itemPass: "hat", display: "true"},
+  {text: "answer2", nextPass: 12, test: "true", display: "true"}]
+));
+pages.push(new Page(9,
+  "subtitle",
+  "Abandoned hunting lodge - find compass/water",
+  "",
+  [{text: "answer1", nextPass: 3, test: "true", display: "true"},
+   {text: "answer2", nextPass: 3, test: "true", display: "true"}]
+));
+pages.push(new Page(10,
+  "subtitle",
+  "Attacked by zombies",
+  "",
+  [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 2, healthFail: -100, display: "true"}]
+));
+pages.push(new Page(11,
+  "YOU WIN!!!!",
+  "You received a magical hat and teleported out of the forest.",
+  "",
+  [{text: "Play again?", nextPass: 0, test: "true", reset: 'true', display: "true"}]
+));
+pages.push(new Page(12,
+  "subtitle",
+  "You meet a weird person",
+  "",
+  [{text: "confront", nextPass: 13, nextFail: 14, display: "true", test: "book.player.invContains('water') || book.player.invContains('mushroom')", healthFail: -40},
+  {text: "run away", nextPass: 15, test: "true", display: "true"}]
+));
+
+
+pages.push(new Page(16,
+  "subtitle",
+  "Kill zombies with axe",
+  "",
+  [{text: "keep exploring", test: "Math.random() > 0.5", nextPass: 8, nextFail: 9, display: "true"}]
+));
+pages.push(new Page(17,
+  "subtitle",
+  "Vampire gives you an amulet",
+  "",
+  [{text: "leave the cave", test: "true", nextPass: 12, display: "true"}]
+));
+pages.push(new Page(18,
+  "subtitle",
+  "You found a mushroom",
+  "",
+  [{text: "leave the cave", test: "true", itemPass: "mushroom", nextPass: 12, display: "true"}]
 ));
 // pages.push(new Page(7,
 //   "subtitle",
@@ -139,6 +207,8 @@ $(document).ready(function() {
     $('#healthbar').css("width", book.player.health + "%");
     if (book.player.health < 25) {
       $('#healthbar').css("background-color", "red");
+    } else {
+      $('#healthbar').css("background-color", "#718059");
     }
     $('.item').hide();
     book.player.inv.forEach(function(item) {
