@@ -38,14 +38,14 @@ Book.prototype.loadPage = function(option) {
       this.player.health += option.healthPass;
     }
     if(option.itemPass) {
-      this.player.inv.push(option.itemPass);
+        this.player.inv = this.player.inv.concat(option.itemPass);
     }
   } else {
     if(option.healthFail) {
       this.player.health += option.healthFail;
     }
     if(option.itemFail) {
-      this.player.inv.push(option.itemFail);
+        this.player.inv = this.player.inv.concat(option.itemFail);
     }
   }
   if (this.player.health <= 0) {
@@ -113,8 +113,8 @@ pages.push(new Page(5,
   "Subtitle",
   "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
   "img/page-icons/cave.svg",
-  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", display: "true", healthPass: -50, healthFail: -100, itemPass: "amulet"},
-  {text: "Try to befriend her.", nextPass: 17, test: "true", itemPass: "amulet", display: "true"}]
+  [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", display: "true", healthPass: -50, healthFail: -100, itemPass: ["amulet"]},
+  {text: "Try to befriend her.", nextPass: 17, test: "true", itemPass: ["amulet"], display: "true"}]
 ));
 pages.push(new Page(6,
   "subtitle",
@@ -127,21 +127,20 @@ pages.push(new Page(7,
   "subtitle",
   "You made it back to camp and found an axe",
   "",
-  [{text: "pick up the axe", nextPass: 3, itemPass: "axe", test: "true", display: "true"}]
+  [{text: "pick up the axe", nextPass: 3, itemPass: ["axe"], test: "true", display: "true"}]
 ));
 pages.push(new Page(8,
   "subtitle",
   "You meet an owl (Riddle)",
   "",
-  [{text: "answer1", nextPass: 11, test: "true", itemPass: "hat", display: "true"},
+  [{text: "answer1", nextPass: 11, test: "true", itemPass: ["hat"], display: "true"},
   {text: "answer2", nextPass: 12, test: "true", display: "true"}]
 ));
 pages.push(new Page(9,
   "subtitle",
-  "Abandoned hunting lodge - find compass/water",
+  "Abandoned hunting lodge - find compass/water, but then get attacked by a ghost",
   "",
-  [{text: "answer1", nextPass: 3, test: "true", display: "true"},
-   {text: "answer2", nextPass: 3, test: "true", display: "true"}]
+  [{text: "run away", nextPass: 12, itemPass: ["compass", "water"], test: "true", display: "true", healthPass: -20}]
 ));
 pages.push(new Page(10,
   "subtitle",
@@ -159,10 +158,29 @@ pages.push(new Page(12,
   "subtitle",
   "You meet a weird person",
   "",
-  [{text: "confront", nextPass: 13, nextFail: 14, display: "true", test: "book.player.invContains('water') || book.player.invContains('mushroom')", healthFail: -40},
-  {text: "run away", nextPass: 15, test: "true", display: "true"}]
+  [{text: "confront", nextPass: 13, test: "true", display: "true" },
+  {text: "run away", nextPass: 19, test: "true", display: "true"}]
 ));
-
+pages.push(new Page(13,
+  "subtitle",
+  "you confront the stranger",
+  "",
+  [{text: "give water", test: "true", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"]},
+  {text: "give mushroom", test: "true", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"]},
+  {text: "fight stranger", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, display: "true", healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
+));
+pages.push(new Page(14,
+  "subtitle",
+  "You gave them water. you got a map",
+  "",
+  [{text: "take map", nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')", display: "true"}]
+));
+pages.push(new Page(15,
+  "YOU WIN!!!",
+  "You used map and compass to escape the forest",
+  "",
+  [{text: "Play again?", nextPass: 0, test: "true", display: "true", gameOver: "true"}]
+));
 
 pages.push(new Page(16,
   "subtitle",
@@ -180,22 +198,40 @@ pages.push(new Page(18,
   "subtitle",
   "You found a mushroom",
   "",
-  [{text: "leave the cave", test: "true", itemPass: "mushroom", nextPass: 12, display: "true"}]
+  [{text: "leave the cave", test: "true", itemPass: ["mushroom"], nextPass: 12, display: "true"}]
 ));
-// pages.push(new Page(7,
-//   "subtitle",
-//   "Befriend vampire. Get amulet.",
-//   "",
-//   [{text: "", nextPass: , nextFail: , test: ""},
-//   {text: "", nextPass: , test: ""}]
-// ));
-// pages.push(new Page(7,
-//   "subtitle",
-//   "",
-//   "",
-//   [{text: "", nextPass: , nextFail: , test: ""},
-//   {text: "", nextPass: , test: "", item: ""}]
-// ));
+pages.push(new Page(19,
+  "subtitle",
+  "You get stuck in a bear trap",
+  "",
+  [{text: "use knife to free self from bear trap", display: "book.player.invContains('knife')", nextPass: 23, test: "true"},
+  {text: "wait for someone to find you", display: "true", nextPass: 2, test: "true"}]
+));
+pages.push(new Page(20,
+  "subtitle",
+  "the mushroom turned out to be poisoned! the man dies, you take his knife",
+  "",
+  [{text: "keep exploring", display: "true", nextPass: 19, test: "true"}]
+));
+pages.push(new Page(21,
+  "subtitle",
+  "you used the axe to kill the stranger. you take his knife",
+  "",
+  [{text: "keep exploring", display: "true", nextPass: 19, test: "true"}]
+));
+pages.push(new Page(22,
+  "subtitle",
+  "you fight the stranger with your bear hands. you barely manage to get away.",
+  "",
+  [{text: "keep exploring", display: "true", nextPass: 19, test: "true"}]
+));
+pages.push(new Page(23,
+  "subtitle",
+  "you use the knife to free yourself from the bear trap. exhausted, you see an exit from the forest.",
+  "",
+  [{text: "stuble out of forest", display: "true", nextPass: 4, test: "true"}]
+));
+
 var book = new Book(pages);
 
 // Front end logic
