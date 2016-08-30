@@ -69,8 +69,8 @@ pages.push(new Page(0,
   "subtitle",
   "Your camp has been overrun by zombies!",
   "img/page-icons/zombie.svg",
-  [{text: "Run away!", nextPass: 1, test: "true", health: -5},
-  {text: "Play dead.", nextPass: 2, test: "true", health: -100}]
+  [{text: "Run away!", nextPass: 1, test: "true", healthPass: -5, itemPass: "axe"},
+  {text: "Play dead.", nextPass: 2, test: "true", healthPass: -100}]
 ));
 pages.push(new Page(1,
   "subtitle",
@@ -130,10 +130,15 @@ var book = new Book(pages);
 
 // Front end logic
 $(document).ready(function() {
+  book.player.inv.push("lighter");
   function changePage() {
     $('#subtitle').text(book.currentPage.subtitle);
     $('#prompt').text(book.currentPage.prompt);
     $('#storyImg').attr("src", book.currentPage.img);
+    $('#healthbar').css("width", book.player.health + "%");
+    book.player.inv.forEach(function(item) {
+      $("#" + item).show();
+    });
     $('li').hide();
     book.currentPage.options.forEach(function(option, i) {
       $('#option' + i).show();
