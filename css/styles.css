@@ -56,15 +56,20 @@ li:hover {
   display: none;
 }
 
+.inventory {
+  overflow: hidden;
+}
+
 .itemImg {
   width: 32px;
-  display: block;
   margin: 5px auto 10px;
 }
 
 .item {
   width: 50%;
+  position: relative;
   float: left;
+  overflow-y: auto;
 }
 
 .stats {
@@ -90,6 +95,7 @@ li:hover {
 }
 
 #boy, #girl {
+  position: relative;
   float: left;
   color: #000000;
   background-color: #ffffff;
@@ -199,8 +205,17 @@ li:hover {
     }
 }
 
-/*@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .container {
-    min-width: 768px;
+    width: 98%;
+    margin-top: 10px;
   }
-}*/
+
+  .stats {
+    margin-top: 25px;
+  }
+
+  .item {
+    width: 25%;
+  }
+}
