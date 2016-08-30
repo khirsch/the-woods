@@ -2,7 +2,7 @@
 function Player () {
   this.alive = true;
   this.health = 100;
-  this.inv = [];
+  this.inv = ["lighter"];
 }
 
 Player.prototype.invContains = function(item) {
@@ -22,12 +22,16 @@ function Book (pages) {
   this.currentPage = pages[0];
   this.player = new Player();
   this.gameOver = false;
+  this.startOver = false;
 }
 
 Book.prototype.loadPage = function(option) {
   var outcome = eval(option.test);
   if(option.gameOver === true) {
     this.gameOver = true;
+  }
+  if (option.reset) {
+    this.reset();
   }
   if (outcome) {
     if(option.healthPass) {
@@ -48,10 +52,8 @@ Book.prototype.loadPage = function(option) {
     this.player.alive = false;
     this.gameOver = true;
     this.currentPage = this.pages[2];
-    this.reset();
   } else if (this.gameOver && this.player.alive) {
     this.currentPage = this.pages[4];
-    this.reset();
   } else if (outcome) {
     this.currentPage = this.pages[option.nextPass];
   } else {
@@ -83,7 +85,7 @@ pages.push(new Page(2,
   "YOU DIED!",
   "The dark forest proved to be more than you could handle.",
   "img/page-icons/rip.svg",
-  [{text: "Try again?", nextPass: 0, test: "true"}]
+  [{text: "Try again?", nextPass: 0, test: "true", reset: 'true'}]
 ));
 pages.push(new Page(3,
   "subtitle",
@@ -96,7 +98,7 @@ pages.push(new Page(4,
   "YOU WIN!!!!",
   "You have survived the night and lived to find help in the morning.",
   "img/page-icons/fire.svg",
-  [{text: "Play again?", nextPass: 0, test: "true"}]
+  [{text: "Play again?", nextPass: 0, test: "true", reset: 'true'}]
 ));
 pages.push(new Page(5,
   "Subtitle",
@@ -130,12 +132,12 @@ var book = new Book(pages);
 
 // Front end logic
 $(document).ready(function() {
-  book.player.inv.push("lighter");
   function changePage() {
     $('#subtitle').text(book.currentPage.subtitle);
     $('#prompt').text(book.currentPage.prompt);
     $('#storyImg').attr("src", book.currentPage.img);
     $('#healthbar').css("width", book.player.health + "%");
+    $('.item').hide();
     book.player.inv.forEach(function(item) {
       $("#" + item).show();
     });
