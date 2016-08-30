@@ -53,6 +53,7 @@ Book.prototype.loadPage = function(option) {
     this.gameOver = true;
     this.currentPage = this.pages[2];
   } else if (this.gameOver && this.player.alive) {
+    debugger;
     this.currentPage = this.pages[4];
   } else if (outcome) {
     this.currentPage = this.getPage(this.pages[option.nextPass]);
@@ -61,14 +62,15 @@ Book.prototype.loadPage = function(option) {
   }
 }
 Book.prototype.getPage = function(page) {
+  var newPage = jQuery.extend(true, {}, page)
   var newOptions = []
   page.options.forEach(function(option) {
     if (eval(option.display)) {
       newOptions.push(option);
     }
   });
-  page.options = newOptions;
-  return page
+  newPage.options = newOptions;
+  return newPage;
 }
 Book.prototype.reset = function() {
   this.player = new Player();
@@ -104,7 +106,7 @@ pages.push(new Page(3,
   {text: "Fire", nextPass: 10, test: "true", display: "true"}]
 ));
 pages.push(new Page(4,
-  "YOU WIN!!!!",
+  "YOU SURVIVED!",
   "You have survived the night and lived to find help in the morning.",
   "img/page-icons/fire.svg",
   [{text: "Play again?", nextPass: 0, test: "true", reset: 'true', display: "true"}]
@@ -114,7 +116,7 @@ pages.push(new Page(5,
   "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
   "img/page-icons/cave.svg",
   [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", display: "true", healthPass: -50, healthFail: -100, itemPass: ["amulet"]},
-  {text: "Try to befriend her.", nextPass: 17, test: "true", itemPass: ["amulet"], display: "true"}]
+  {text: "Try to befriend her.", nextPass: 17, test: "true", display: "true", itemPass: ["amulet"]}]
 ));
 pages.push(new Page(6,
   "subtitle",
@@ -134,7 +136,7 @@ pages.push(new Page(8,
   "You meet an owl (Riddle)",
   "",
   [{text: "answer1", nextPass: 11, test: "true", itemPass: ["hat"], display: "true"},
-  {text: "answer2", nextPass: 12, test: "true", display: "true"}]
+  {text: "answer2", nextPass: 24, test: "true", display: "true", healthPass: -40}]
 ));
 pages.push(new Page(9,
   "subtitle",
@@ -146,10 +148,10 @@ pages.push(new Page(10,
   "subtitle",
   "Attacked by zombies",
   "",
-  [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 2, healthFail: -100, display: "true"}]
+  [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60, display: "true"}]
 ));
 pages.push(new Page(11,
-  "YOU WIN!!!!",
+  "YOU SURVIVED!",
   "You received a magical hat and teleported out of the forest.",
   "",
   [{text: "Play again?", nextPass: 0, test: "true", reset: 'true', display: "true"}]
@@ -176,10 +178,10 @@ pages.push(new Page(14,
   [{text: "take map", nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')", display: "true"}]
 ));
 pages.push(new Page(15,
-  "YOU WIN!!!",
+  "YOU SURVIVED!",
   "You used map and compass to escape the forest",
   "",
-  [{text: "Play again?", nextPass: 0, test: "true", display: "true", gameOver: "true"}]
+  [{text: "Play again?", nextPass: 0, test: "true", display: "true", reset: 'true'}]
 ));
 
 pages.push(new Page(16,
@@ -205,7 +207,7 @@ pages.push(new Page(19,
   "You get stuck in a bear trap",
   "",
   [{text: "use knife to free self from bear trap", display: "book.player.invContains('knife')", nextPass: 23, test: "true"},
-  {text: "wait for someone to find you", display: "true", nextPass: 2, test: "true"}]
+  {text: "wait for someone to find you", display: "true", nextPass: 2, test: "true", healthPass: -100}]
 ));
 pages.push(new Page(20,
   "subtitle",
@@ -231,7 +233,18 @@ pages.push(new Page(23,
   "",
   [{text: "stuble out of forest", display: "true", nextPass: 4, test: "true"}]
 ));
-
+pages.push(new Page(24,
+  "subtitle",
+  "Wrong answer! Owl attacks you.",
+  "",
+  [{text: "run away", display: "true", nextPass: 12, test: "true"}]
+));
+pages.push(new Page(25,
+  "subtitle",
+  "You barely escape the zombies",
+  "",
+  [{text: "keep running", display: "true", nextPass: 12, test: "true"}]
+));
 var book = new Book(pages);
 
 // Front end logic
