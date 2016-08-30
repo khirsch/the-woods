@@ -51,8 +51,14 @@ Book.prototype.loadPage = function(option) {
         this.player.inv = this.player.inv.concat(option.itemPass);
     }
     if(option.itemRemovePass) {
-      var location = this.player.inv.indexOf(option.itemRemovePass);
-      this.player.inv.splice(location, 1);
+      var inv = this.player.inv;
+      option.itemRemovePass.forEach(function(item) {
+        if (inv.indexOf(item) >= 0) {
+          var location = inv.indexOf(item);
+          inv.splice(location, 1);
+        }
+      });
+      this.player.inv = inv;
     }
   } else {
     if(option.healthFail) {
@@ -62,8 +68,14 @@ Book.prototype.loadPage = function(option) {
         this.player.health += option.healthFail;
       }
       if(option.itemRemoveFail) {
-        var location = this.player.inv.indexOf(option.itemRemoveFail);
-        this.player.inv.splice(location, 1);
+        var inv = this.player.inv;
+        option.itemRemoveFail.forEach(function(item) {
+          if(inv.indexOf(item) >= 0) {
+            var location = inv.indexOf(item);
+            inv.splice(location, 1);
+          }
+        });
+        this.player.inv = inv;
       }
     }
     if(option.itemFail) {
@@ -140,6 +152,30 @@ function setPages() {
   var rand = Math.round(Math.random()*2);
   var owlPage = owlPages[rand];
 
+  var randomPages = [];
+  randomPages.push(new Page(10,
+    "subtitle",
+    "you encounter a gnome",
+    "img/page-icons/gnome.svg",
+    false,
+    [{text: "run away", nextPass: 31, nextFail: 12, test: "book.player.invContains('amulet') || book.player.invContains('compass')", itemRemovePass: ["amulet", "compass"]}]
+  ));
+  randomPages.push(new Page(10,
+    "subtitle",
+    "Attacked by zombies",
+    "img/page-icons/zombie.svg",
+    false,
+    [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
+  ));
+
+  var rand;
+  if (Math.random() < 0.8) {
+    rand = 0;
+  } else {
+    rand = 1;
+  }
+  var randomPage = randomPages[rand];
+
   var pages = [];
   pages.push(new Page(0,
     "subtitle",
@@ -210,13 +246,7 @@ function setPages() {
     false,
     [{text: "explore the lodge", nextPass: 28, healthPass: -20, itemPass: ["compass", "water"]}]
   ));
-  pages.push(new Page(10,
-    "subtitle",
-    "Attacked by zombies",
-    "img/page-icons/zombie.svg",
-    false,
-    [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
-  ));
+  pages.push(randomPage);
   pages.push(new Page(11,
     "YOU SURVIVED!",
     "You received a magical hat and teleported out of the forest.",
@@ -237,8 +267,8 @@ function setPages() {
     "you confront the stranger",
     "img/page-icons/person.svg",
     false,
-    [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"], itemRemovePass: "water"},
-    {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"], itemRemovePass: "mushroom"},
+    [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"], itemRemovePass: ["water"]},
+    {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"], itemRemovePass: ["mushroom"]},
     {text: "fight stranger", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
   ));
   pages.push(new Page(14,
@@ -276,7 +306,7 @@ function setPages() {
     "img/page-icons/cave.svg",
     false,
     [{text: "leave the cave", nextPass: 12},
-    {text: "eat the mushroom", nextPass: 26, healthPass: -1000, itemRemovePass: "mushroom"}]
+    {text: "eat the mushroom", nextPass: 26, healthPass: -1000, itemRemovePass: ["mushroom"]}]
   ));
   pages.push(new Page(19,
     "subtitle",
@@ -362,6 +392,13 @@ function setPages() {
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
+  ));
+  pages.push(new Page(31,
+    "subtitle",
+    "The gnome took an item!",
+    "img/page-icons/sunrise.svg",
+    false,
+    [{text: "Keep exploring", nextPass: 12}]
   ));
   return pages;
 }
