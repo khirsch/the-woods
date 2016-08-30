@@ -347,7 +347,7 @@ function setPages() {
     "you were attacked by a ghost.",
     "img/page-icons/ghost.svg",
     true,
-    [{text: "run away", nextPass: 10, healthPass: -20}]
+    [{text: "run away", nextPass: 10}]
   ));
   pages.push(new Page(29,
     "YOU DIED!",
