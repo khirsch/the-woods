@@ -257,9 +257,14 @@ $(document).ready(function() {
       $('#option' + i).text(book.currentPage.options[i].text);
     });
   }
-  $('#start').click(function() {
+  $('.start').click(function() {
     $('.title').hide();
-    $('.story').show();
+    $('.book').show();
+    if ($(this).attr('id') === "boy") {
+      $('#profilePic').html("<img src='img/boy.png' alt='Boy'>");
+    } else {
+      $('#profilePic').html("<img src='img/girl.png' alt='Girl'>");
+    }
     changePage();
   });
   $('li').click(function() {

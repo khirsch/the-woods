@@ -40,31 +40,10 @@ li:hover {
   color: #718059;
 }
 
-.stats {
-  margin-top: 100px
-}
-
-.btn {
-  display: block;
-  margin: auto;
-  color: #000000;
-  background-color: #ffffff;
-  border: 1px solid #000000;
-  font-weight: bold;
-}
-
-.btn:hover {
-  color: #000000;
-  -webkit-animation: swing 1s ease;
-  animation: swing 1s ease;
-  -webkit-animation-iteration-count: 1;
-  animation-iteration-count: 1;
-}
-
 .container {
   display: block;
   margin: 15% auto;
-  padding: 30px;
+  padding: 30px 45px;
   width: 60%;
   max-width: 800px;
   background-color: #ffffff;
@@ -73,28 +52,66 @@ li:hover {
   opacity: 0.8;
 }
 
-.story, .item {
+.book, .item {
   display: none;
 }
 
 .itemImg {
   width: 32px;
   display: block;
-  margin: auto;
+  margin: 5px auto 10px;
 }
 
-.inventory {
-  margin: 0;
+.item {
+  width: 50%;
+  float: left;
 }
 
 .stats {
   border: 1px dashed #000000;
-  padding: 10px;
+  text-align: center;
+  padding-top: 10px;
+  border-radius: 20px;
+}
+
+.stats h6 {
+  text-align: left;
+  margin-bottom: 5px;
 }
 
 .progress {
+  margin-bottom: 10px;
+}
+
+#character {
+  text-align: center;
+  width: 180px;
+  margin: 0 auto;
+}
+
+#boy, #girl {
+  float: left;
+  color: #000000;
+  background-color: #ffffff;
+  font-weight: bold;
   margin-top: 10px;
-  margin-bottom: 0 !important;
+}
+
+#boy {
+  margin-right: 52px;
+}
+
+#boy:hover, #girl:hover {
+  color: #000000;
+  -webkit-animation: swing 1s ease;
+  animation: swing 1s ease;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+#profilePic img {
+  width: 45px;
+  margin: 0 auto 10px auto;
 }
 
 #healthbar {
@@ -182,8 +199,8 @@ li:hover {
     }
 }
 
-@media screen and (max-width: 768px) {
+/*@media screen and (max-width: 768px) {
   .container {
     min-width: 768px;
   }
-}
+}*/
