@@ -15,50 +15,56 @@
         <h1>The Woods</h1>
         <h3>An Interactive Story</h3>
         <img id="titleImg" src="img/camp.svg" alt="Campsite">
-        <button id="start" class="btn btn-lg" type="button">Start</button>
+        <div id="character">
+          <h4>Choose a Character:</h4>
+          <img src="img/boy.png" alt="Boy" class="start" id="boy">
+          <img src="img/girl.png" alt="Girl" class="start" id="girl">
+        </div>
       </div>
-      <div class="story">
-        <img id="storyImg">
-        <h4 id="subtitle"></h4>
-        <p id="prompt"></p>
-        <ul id="options">
-          <li id="option0"></li>
-          <li id="option1"></li>
-        </ul>
-        <div class="stats">
-          <div class="inventory row">
+      <div class="row book">
+        <div class="story col-sm-9">
+          <img id="storyImg">
+          <h4 id="subtitle"></h4>
+          <p id="prompt"></p>
+          <ul id="options">
+            <li id="option0"></li>
+            <li id="option1"></li>
+          </ul>
+        </div>
+        <div class="stats col-sm-3">
+          <div id="profilePic"></div>
+          <h6 id="health">Health:</h6>
+          <div class="progress">
+            <div id="healthbar" class="progress-bar progress-bar-striped" role="progressbar"></div>
+          </div>
+          <div class="inventory">
             <h6>Inventory:</h6>
-            <div id="lighter" class="item col-xs-2">
+            <div id="lighter" class="item">
               <img class="itemImg" src="img/item-icons/lighter.png">
             </div>
-             <div id="axe" class="item col-xs-2">
+             <div id="axe" class="item">
               <img class="itemImg" src="img/item-icons/axe.png">
             </div>
-            <div id="compass" class="item col-xs-2">
+            <div id="compass" class="item">
               <img class="itemImg" src="img/item-icons/compass.png">
             </div>
-            <div id="water" class="item col-xs-2">
+            <div id="water" class="item">
               <img class="itemImg" src="img/item-icons/water.png">
             </div>
-            <div id="map" class="item col-xs-2">
+            <div id="map" class="item">
               <img class="itemImg" src="img/item-icons/map.png">
             </div>
-            <div id="knife" class="item col-xs-2">
+            <div id="knife" class="item">
               <img class="itemImg" src="img/item-icons/knife.png">
             </div>
-            <div id="amulet" class="item col-xs-2">
+            <div id="amulet" class="item">
               <img class="itemImg" src="img/item-icons/amulet.png">
             </div>
-            <div id="mushroom" class="item col-xs-2">
+            <div id="mushroom" class="item">
               <img class="itemImg" src="img/item-icons/mushroom.png">
             </div>
-            <div id="hat" class="item col-xs-2">
+            <div id="hat" class="item">
               <img class="itemImg" src="img/item-icons/hat.png">
-            </div>
-          </div>
-          <div class="progress">
-            <div id="healthbar" class="progress-bar progress-bar-striped" role="progressbar">
-            Health
             </div>
           </div>
         </div>
