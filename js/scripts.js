@@ -71,7 +71,7 @@ pages.push(new Page(0,
   "subtitle",
   "Your camp has been overrun by zombies!",
   "img/page-icons/zombie.svg",
-  [{text: "Run away!", nextPass: 1, test: "true", healthPass: -5, itemPass: "axe"},
+  [{text: "Run away!", nextPass: 1, test: "true", healthPass: -80, itemPass: "axe"},
   {text: "Play dead.", nextPass: 2, test: "true", healthPass: -100}]
 ));
 pages.push(new Page(1,
@@ -137,6 +137,9 @@ $(document).ready(function() {
     $('#prompt').text(book.currentPage.prompt);
     $('#storyImg').attr("src", book.currentPage.img);
     $('#healthbar').css("width", book.player.health + "%");
+    if (book.player.health < 25) {
+      $('#healthbar').css("background-color", "red");
+    }
     $('.item').hide();
     book.player.inv.forEach(function(item) {
       $("#" + item).show();
