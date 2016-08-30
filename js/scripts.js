@@ -206,7 +206,7 @@ $(document).ready(function() {
     $('#storyImg').attr("src", book.currentPage.img);
     $('#healthbar').css("width", book.player.health + "%");
     if (book.player.health < 25) {
-      $('#healthbar').css("background-color", "red");
+      $('#healthbar').css("background-color", "#990000");
     } else {
       $('#healthbar').css("background-color", "#718059");
     }
