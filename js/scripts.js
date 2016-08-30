@@ -178,35 +178,35 @@ function setPages() {
 
   var pages = [];
   pages.push(new Page(0,
-    "subtitle",
-    "Your camp has been overrun by zombies!",
+    "Zombie Attack",
+    "You are sleeping peacefully in your tent when all of a sudden you hear the moans of an approaching zombie hoard. What do you do?",
     "img/page-icons/zombie.svg",
     false,
     [{text: "Run away!", nextPass: 1},
     {text: "Play dead.", nextPass: 2, healthPass: -1000}]
   ));
   pages.push(new Page(1,
-    "subtitle",
-    "You lose your sense of direction and get lost!",
+    "The Woods",
+    "You run into the woods with nothing but a lighter in your pocket. You soon realize that you've lost your sense of direction. You are lost! Now what?",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Go back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
+    [{text: "Try to find your way back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
     {text: "Keep running.", nextPass: 3}]
   ));
   pages.push(new Page(2,
     "YOU DIED!",
-    "The dark forest proved to be more than you could handle.",
+    "The zombies were not fooled by your act. They mercilessly devoured your uncreative brain.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Try again?", nextPass: 0, reset: 'true'}]
   ));
   pages.push(new Page(3,
     "subtitle",
-    "Make for cave or make a fire?",
+    "You stop in a clearing to catch your breath. In the near distance, you notice a cave. Should you make for the cave or continue through the forest?",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Cave", nextPass: 5},
-    {text: "Fire", test: "Math.random() > 0.5", nextPass: 8, nextFail: 9}]
+    [{text: "Make for the cave.", nextPass: 5},
+    {text: "Continue on your current path.", test: "Math.random() > 0.5", nextPass: 8, nextFail: 9}]
   ));
   pages.push(new Page(4,
     "YOU SURVIVED!",
@@ -216,35 +216,35 @@ function setPages() {
     [{text: "Play again?", nextPass: 0, reset: 'true'}]
   ));
   pages.push(new Page(5,
-    "Subtitle",
-    "Upon entering the cave, a swarm of bats flies out all around you. As the air clears, you see a shrouded figure standing in the dark depths of the cave. She welcomes you in a shrill voice, and you can't help but notice her sharp fangs as she speaks. She's a vampire!",
+    "The Cave",
+    "Upon entering the cave, you see a shrouded figure standing in the dark depths of the cave. He welcomes you in an alluring voice, and you can't help but notice his sharp fangs as he speaks. He's a vampire!",
     "img/page-icons/cave.svg",
     false,
-    [{text: "Try to kill her.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
-    {text: "Try to befriend her.", nextPass: 17, itemPass: ["amulet"]}]
+    [{text: "Attack him.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
+    {text: "Strike up a conversation.", nextPass: 17, itemPass: ["amulet"]}]
   ));
   pages.push(new Page(6,
-    "subtitle",
-    "You killed the vampire!",
+    "You Did It!",
+    "With a swing of your mighty axe, you slay the vampire!",
     "img/page-icons/vampire.svg",
     false,
-    [{text: "Keep exploring the cave.", nextPass: 18, itemPass: ["mushroom"]},
-    {text: "Afraid there may be more vampires, you leave the cave.", nextPass: 10}]
+    [{text: "Explore the cave.", nextPass: 18, itemPass: ["mushroom"]},
+    {text: "Get the heck outta there!", nextPass: 10}]
   ));
   pages.push(new Page(7,
-    "subtitle",
-    "You made it back to camp and found an axe",
+    "A Small Victory",
+    "You manage to find your way back. After searching the trampled campsite, you manage to find your axe still in the stump where you left it.",
     "img/page-icons/axe.svg",
     false,
-    [{text: "pick up the axe", nextPass: 3, itemPass: ["axe"]}]
+    [{text: "Pick it up and continue on.", nextPass: 3, itemPass: ["axe"]}]
   ));
   pages.push(owlPage);
   pages.push(new Page(9,
-    "subtitle",
-    "Abandoned hunting lodge - find compass/water",
+    "The Lodge",
+    "You stumble upon an abandoned hunting lodge.",
     "img/page-icons/lodge.svg",
     false,
-    [{text: "explore the lodge", nextPass: 28, healthPass: -20, itemPass: ["compass", "water"]}]
+    [{text: "Explore the lodge.", nextPass: 28, healthPass: -20, itemPass: ["compass", "water"]}]
   ));
   pages.push(randomPage);
   pages.push(new Page(11,
