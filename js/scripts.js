@@ -229,7 +229,7 @@ function setPages() {
     "img/page-icons/vampire.svg",
     false,
     [{text: "Keep exploring the cave.", nextPass: 18, itemPass: ["mushroom"]},
-    {text: "Afraid there may be more vampires, you leave the cave.", nextPass: 12}]
+    {text: "Afraid there may be more vampires, you leave the cave.", nextPass: 10}]
   ));
   pages.push(new Page(7,
     "subtitle",
@@ -267,8 +267,8 @@ function setPages() {
     "you confront the stranger",
     "img/page-icons/person.svg",
     false,
-    [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemPass: ["map"], itemRemovePass: ["water"]},
-    {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemPass: ["knife"], itemRemovePass: ["mushroom"]},
+    [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
+    {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
     {text: "fight stranger", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
   ));
   pages.push(new Page(14,
@@ -276,7 +276,7 @@ function setPages() {
     "You gave them water. you got a map",
     "img/page-icons/woods.svg",
     false,
-    [{text: "take map", nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
+    [{text: "take map", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
   ));
   pages.push(new Page(15,
     "YOU SURVIVED!",
@@ -298,14 +298,14 @@ function setPages() {
     "Vampire gives you a shiny amulet from around her neck. It looks valuable.",
     "img/page-icons/vampire.svg",
     false,
-    [{text: "leave the cave", nextPass: 12}]
+    [{text: "leave the cave", nextPass: 10}]
   ));
   pages.push(new Page(18,
     "subtitle",
     "You found a mushroom",
     "img/page-icons/cave.svg",
     false,
-    [{text: "leave the cave", nextPass: 12},
+    [{text: "leave the cave", nextPass: 10},
     {text: "eat the mushroom", nextPass: 26, healthPass: -1000, itemRemovePass: ["mushroom"]}]
   ));
   pages.push(new Page(19,
@@ -318,10 +318,10 @@ function setPages() {
   ));
   pages.push(new Page(20,
     "subtitle",
-    "the mushroom turned out to be poisoned! the man dies, you take his knife",
+    "the mushroom turned out to be poisoned! the man dies, you see a knife at his side",
     "img/page-icons/person.svg",
     false,
-    [{text: "keep exploring", nextPass: 19}]
+    [{text: "take knife", itemPass: ["knife"], nextPass: 19}]
   ));
   pages.push(new Page(21,
     "subtitle",
