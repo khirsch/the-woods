@@ -37,7 +37,7 @@ Book.prototype.loadPage = function(option) {
     this.gameOver = true;
   }
   if (option.reset) {
-    this.reset();
+    this.startOver = true;
   }
   if (outcome) {
     if(option.healthPass && book.player.invContains("amulet")) {
@@ -123,6 +123,8 @@ Book.prototype.reset = function() {
   this.player = new Player();
   this.gameOver = false;
   this.pages = setPages();
+  this.startOver = false;
+  this.currentPage = this.pages[0];
 
 }
 
@@ -478,31 +480,51 @@ var book = new Book(setPages());
 
 // Front end logic
 $(document).ready(function() {
-  function changePage() {
-    $('.story').addClass("fadeOut");
+  function loadStartPage() {
+    $('.title h1').fadeIn();
     setTimeout(function() {
-      $('#subtitle').text(book.currentPage.subtitle);
-      $('#prompt').text(book.currentPage.prompt);
-      $('#storyImg').attr("src", book.currentPage.img);
-      $('#healthbar').css("width", book.player.health + "%");
-      if (book.player.health < 25) {
-        $('#healthbar').css("background-color", "#990000");
-      } else {
-        $('#healthbar').css("background-color", "#718059");
-      }
-      $('.item').hide();
-      book.player.inv.forEach(function(item) {
-        $("#" + item).show();
-      });
-      $('li').hide();
-      book.currentPage.options.forEach(function(option, i) {
-        $('#option' + i).show();
-        $('#option' + i).attr("value", book.currentPage.number);
-        $('#option' + i).text(book.currentPage.options[i].text);
-      });
-      $('.story').removeClass("fadeOut");
-      $('.story').addClass("fadeIn");
-    }, 100);
+      $('.title #mainSubtitle').fadeIn();
+    }, 1000);
+    setTimeout(function() {
+      $('.title #character').fadeIn();
+    }, 2000);
+  }
+  loadStartPage();
+  function changePage() {
+    if (book.startOver) {
+      $('.book').hide();
+      $('.title').show();
+      book.reset();
+      loadStartPage();
+    } else {
+      $('.title h1').hide();
+      $('.title #mainSubtitle').hide();
+      $('.title #character').hide();
+      $('.story').addClass("fadeOut");
+      setTimeout(function() {
+        $('#subtitle').text(book.currentPage.subtitle);
+        $('#prompt').text(book.currentPage.prompt);
+        $('#storyImg').attr("src", book.currentPage.img);
+        $('#healthbar').css("width", book.player.health + "%");
+        if (book.player.health < 25) {
+          $('#healthbar').css("background-color", "#990000");
+        } else {
+          $('#healthbar').css("background-color", "#718059");
+        }
+        $('.item').hide();
+        book.player.inv.forEach(function(item) {
+          $("#" + item).show();
+        });
+        $('li').hide();
+        book.currentPage.options.forEach(function(option, i) {
+          $('#option' + i).show();
+          $('#option' + i).attr("value", book.currentPage.number);
+          $('#option' + i).text(book.currentPage.options[i].text);
+        });
+        $('.story').removeClass("fadeOut");
+        $('.story').addClass("fadeIn");
+      }, 100);
+    }
   }
   $('.start').click(function() {
     $('.title').hide();
