@@ -223,11 +223,11 @@ function setPages() {
     [{text: "Explore the lodge.", nextPass: 28, healthPass: -20, itemPass: ["compass", "water"]}]
   ));
   pages.push(new Page(10,
-    "subtitle",
-    "Attacked by zombies",
+    "Zombie Attack",
+    "As you make your way through the woods, a zombie crashes out of the trees right into you!",
     "img/page-icons/zombie.svg",
     false,
-    [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
+    [{text: "Defend yourself!", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
@@ -277,7 +277,7 @@ function setPages() {
   ));
   pages.push(new Page(17,
     "Vampire Encounter",
-    "The vampire senses your despiration. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance.",
+    "The vampire senses your desperation. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance.",
     "img/page-icons/vampire.svg",
     false,
     [{text: "Leave the cave.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
@@ -377,10 +377,10 @@ function setPages() {
   ));
   pages.push(new Page(31,
     "Gnome Encounter",
-    "The gnome ran away as quickly as it appeared. You glance at your bag and notice something is missing. The gnome took an item!",
+    "You feel something brush up against your leg. Looking around, you notice a pointy hat bouncing away into the bushes. Your pockets feel a little bit lighter.",
     "img/page-icons/gnome.svg",
     false,
-    [{text: "Keep exploring.", nextPass: 12}]
+    [{text: "Keep moving forward.", nextPass: 12}]
   ));
   pages.push(new Page(32,
     "YOU DIED!",
