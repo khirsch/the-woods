@@ -78,7 +78,7 @@ Book.prototype.loadPage = function(option) {
         this.player.inv = this.player.inv.concat(option.itemFail);
     }
   }
-  if (option.axeHealth) {
+  if (option.axeHealth && this.player.invContains("axe")) {
     this.player.axeHealth += option.axeHealth;
     if (this.player.axeHealth <= 0) {
       var location = book.player.inv.indexOf("axe");
@@ -120,12 +120,11 @@ Book.prototype.getPage = function(page) {
   return newPage;
 }
 Book.prototype.reset = function() {
+  this.currentPage = this.pages[0];
   this.player = new Player();
   this.gameOver = false;
   this.pages = setPages();
   this.startOver = false;
-  this.currentPage = this.pages[0];
-
 }
 
 function setPages() {
@@ -446,7 +445,7 @@ function setPages() {
     [{text: "Keep exploring.", nextPass: 10}]
   ));
   pages.push(new Page(39,
-    "YOU DIED!",
+  "YOU DIED!",
     "The vampire proved to be more than you could handle.",
     "img/page-icons/rip.svg",
     true,
@@ -490,37 +489,39 @@ $(document).ready(function() {
     }, 2000);
   }
   loadStartPage();
+  function changePageInfo() {
+    $('#subtitle').text(book.currentPage.subtitle);
+    $('#prompt').text(book.currentPage.prompt);
+    $('#storyImg').attr("src", book.currentPage.img);
+    $('#healthbar').css("width", book.player.health + "%");
+    if (book.player.health < 25) {
+      $('#healthbar').css("background-color", "#990000");
+    } else {
+      $('#healthbar').css("background-color", "#718059");
+    }
+    $('.item').hide();
+    book.player.inv.forEach(function(item) {
+      $("#" + item).show();
+    });
+    $('li').hide();
+    book.currentPage.options.forEach(function(option, i) {
+      $('#option' + i).show();
+      $('#option' + i).attr("value", book.currentPage.number);
+      $('#option' + i).text(book.currentPage.options[i].text);
+    });
+  }
   function changePage() {
     if (book.startOver) {
-      $('.book').hide();
-      $('.title').show();
       book.reset();
+      $('.book').fadeOut(function() {
+        changePageInfo();
+        $('.title').fadeIn();
+      });
       loadStartPage();
     } else {
-      $('.title h1').hide();
-      $('.title #mainSubtitle').hide();
-      $('.title #character').hide();
       $('.story').addClass("fadeOut");
       setTimeout(function() {
-        $('#subtitle').text(book.currentPage.subtitle);
-        $('#prompt').text(book.currentPage.prompt);
-        $('#storyImg').attr("src", book.currentPage.img);
-        $('#healthbar').css("width", book.player.health + "%");
-        if (book.player.health < 25) {
-          $('#healthbar').css("background-color", "#990000");
-        } else {
-          $('#healthbar').css("background-color", "#718059");
-        }
-        $('.item').hide();
-        book.player.inv.forEach(function(item) {
-          $("#" + item).show();
-        });
-        $('li').hide();
-        book.currentPage.options.forEach(function(option, i) {
-          $('#option' + i).show();
-          $('#option' + i).attr("value", book.currentPage.number);
-          $('#option' + i).text(book.currentPage.options[i].text);
-        });
+        changePageInfo();
         $('.story').removeClass("fadeOut");
         $('.story').addClass("fadeIn");
         $('#axeCurrentHealth').css("width",book.player.axeHealth + "%");
@@ -542,7 +543,11 @@ $(document).ready(function() {
     } else {
       $('#profilePic').html("<img src='img/girl.png' alt='Girl'>");
     }
-    changePage();
+    changePageInfo();
+    $('.title h1').hide();
+    $('.title #mainSubtitle').hide();
+    $('.title #character').hide();
+    $('.story').addClass("fadeIn");
   });
   $('li').click(function() {
     var optionNum = $(this).attr('id').charAt(6);
