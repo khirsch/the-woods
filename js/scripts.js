@@ -568,6 +568,7 @@ $(document).ready(function() {
   $('.start').click(function() {
     $('.title').hide();
     $('.book').show();
+    $('.bottomLine').show();
     if ($(this).attr('id') === "boy") {
       $('#profilePic').html("<img src='img/boy.png' alt='Boy'>");
     } else {

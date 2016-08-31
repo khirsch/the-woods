@@ -46,7 +46,7 @@ li:hover {
   padding: 30px 45px;
   width: 60%;
   max-width: 800px;
-  min-height: 350px;
+  height: 560px;
   background-color: #ffffff;
   color: #000000;
   border-radius: 25px;
@@ -73,6 +73,33 @@ li:hover {
   overflow-y: auto;
 }
 
+.book hr {
+  padding-top: 40px;
+}
+
+.bottomLine {
+  margin-top: 60px;
+  display: none;
+}
+
+.stats {
+  border: 1px dashed #000000;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-radius: 20px;
+  min-height: 340px;
+}
+
+.stats h6 {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+
 #axe img {
   margin-bottom: 0;
 }
@@ -87,24 +114,6 @@ li:hover {
   padding-top: 3px;
   background: #718059;
   width: 100%;
-}
-
-.stats {
-  border: 1px dashed #000000;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  border-radius: 20px;
-  min-height: 290px;
-}
-
-.stats h6 {
-  text-align: left;
-  margin-bottom: 5px;
-}
-
-.progress {
-  margin-bottom: 10px;
 }
 
 #character {
@@ -154,7 +163,7 @@ li:hover {
 #storyImg {
   display: block;
   margin: auto;
-  width: 20%;
+  width: 30%;
 }
 
 .title h1,
@@ -243,5 +252,17 @@ li:hover {
 
   .item {
     width: 25%;
+  }
+
+  .book hr {
+    display: none;
+  }
+
+  .bottomLine {
+    display: none !important;
+  }
+
+  #storyImg {
+    width: 20%;
   }
 }
