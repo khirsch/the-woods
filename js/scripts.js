@@ -126,7 +126,7 @@ Book.prototype.reset = function() {
 function setPages() {
   var owlPages = [];
   owlPages.push(new Page(8,
-    "subtitle",
+    "Owl Encounter",
     "You meet an owl. He gives you the following riddle: Three playing cards in a row. Can you name them with these clues? There is a two to the right of a king. A diamond will be found to the left of a spade. An ace is to the left of a heart. A heart is to the left of a spade. Now, identify all three cards. What is your answer?",
     "img/page-icons/owl.svg",
     false,
@@ -134,7 +134,7 @@ function setPages() {
     {text: "King of Hearts, Ace of Diamonds, Two of Spades", nextPass: 24, healthPass: -40}]
   ));
   owlPages.push(new Page(8,
-    "subtitle",
+    "Owl Encounter",
     "You meet an owl. He gives you the following riddle: It cannot be seen, cannot be felt, cannot be heard, cannot be smelt. It lies behind stars and under hills, and empty holes it fills. It comes first and follows after, ends life, kills laughter. What is your answer?",
     "img/page-icons/owl.svg",
     false,
@@ -142,7 +142,7 @@ function setPages() {
     {text: "evil", nextPass: 24, healthPass: -40}]
   ));
   owlPages.push(new Page(8,
-    "subtitle",
+    "Owl Encounter",
     "You meet an owl. He gives you the following riddle: Alive without breath, as cold as death; Never thirsty, ever drinking, all in mail never clinking. What is your answer?",
     "img/page-icons/owl.svg",
     false,
@@ -177,7 +177,7 @@ function setPages() {
     [{text: "Try again?", nextPass: 0, reset: 'true'}]
   ));
   pages.push(new Page(3,
-    "subtitle",
+    "The Woods",
     "You stop in a clearing to catch your breath. In the near distance, you notice a cave. Should you make for the cave or continue through the forest?",
     "img/page-icons/woods.svg",
     false,
@@ -209,7 +209,7 @@ function setPages() {
   ));
   pages.push(new Page(7,
     "A Small Victory",
-    "You manage to find your way back. After searching the trampled campsite, you manage to find your axe still in the stump where you left it.",
+    "You manage to find your way back. After searching the trampled campsite, you find your axe still in the stump where you left it.",
     "img/page-icons/axe.svg",
     false,
     [{text: "Pick it up and continue on.", nextPass: 3, itemPass: ["axe"]}]
@@ -231,49 +231,49 @@ function setPages() {
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
-    "You received a magical hat and teleported out of the forest.",
+    "The owl's riddle proved to be no match for your wit. As the owl turns to fly away, it drops a large conical hat at your feet. You put it on and find yourself teleported to safety out of the woods.",
     "img/page-icons/sunrise.svg",
     false,
     [{text: "Play again?", nextPass: 0, reset: 'true'}]
   ));
   pages.push(new Page(12,
-    "subtitle",
-    "You meet a weird person",
+    "A Myserious Stranger",
+    "As you look ahead through the trees, you notice a mysterious stranger sitting under a tree.",
     "img/page-icons/person.svg",
     false,
-    [{text: "confront", nextPass: 13},
-    {text: "run away", nextPass: 19}]
+    [{text: "Confront them.", nextPass: 13},
+    {text: "Avoid them.", nextPass: 19}]
   ));
   pages.push(new Page(13,
-    "subtitle",
-    "you confront the stranger",
+    "A Mysterious Stranger",
+    "The mysterious stranger looks up as you approach. The stranger stands and begins to reach for something in their pocket...",
     "img/page-icons/person.svg",
     false,
-    [{text: "give water", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
-    {text: "give mushroom", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
-    {text: "fight stranger", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
+    [{text: "Offer to trade your water bottle for help.", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
+    {text: "Give the mushroom to them as a peace offering.", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
+    {text: "Attack! Better safe than sorry.", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
   ));
   pages.push(new Page(14,
-    "subtitle",
-    "You gave them water. you got a map",
+    "A Mysterious Stranger",
+    "The stranger accepts your water and in return gives you a map of the area.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "take map", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
+    [{text: "Thank the stranger and continue on.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
   ));
   pages.push(new Page(15,
     "YOU SURVIVED!",
-    "You used map and compass to escape the forest",
+    "Using the map and compass, you are able to navigate your way out of the woods.",
     "img/page-icons/sunrise.svg",
     false,
     [{text: "Play again?", nextPass: 0, reset: 'true'}]
   ));
 
   pages.push(new Page(16,
-    "subtitle",
-    "Kill zombies with axe",
+    "Zombie Attack",
+    "Quick on your feet, you break away from the zombie and subdue it with a swing of your axe.",
     "img/page-icons/zombie.svg",
     false,
-    [{text: "keep exploring", nextPass: 12}]
+    [{text: "Continue on.", nextPass: 12}]
   ));
   pages.push(new Page(17,
     "Vampire Encounter",
@@ -335,7 +335,7 @@ function setPages() {
   ));
   pages.push(new Page(25,
     "Zombie Attack",
-    "You have nothing to fight off the zombies with, but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life",
+    "You have nothing to fight off the zombies with, but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Keep running.", nextPass: 12}]
