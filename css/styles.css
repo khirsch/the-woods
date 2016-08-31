@@ -73,6 +73,22 @@ li:hover {
   overflow-y: auto;
 }
 
+#axe img {
+  margin-bottom: 0;
+}
+
+#axeTotalHealth {
+  width: 35px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+#axeCurrentHealth {
+  padding-top: 3px;
+  background: #718059;
+  width: 100%;
+}
+
 .stats {
   border: 1px dashed #000000;
   text-align: center;

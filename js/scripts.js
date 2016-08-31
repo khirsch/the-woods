@@ -467,7 +467,7 @@ function setPages() {
   ));
   pages.push(new Page(42,
     "YOU SURVIVED!",
-    "You stuble down the path. You see the sun rising in the distance. Slowly you exit the forest.",
+    "You stumble down the path. You see the sun rising in the distance, and make your way out of the woods.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Start over?", nextPass: 0, reset: true}]
@@ -502,6 +502,12 @@ $(document).ready(function() {
       });
       $('.story').removeClass("fadeOut");
       $('.story').addClass("fadeIn");
+      if (book.player.axeHealth === 50) {
+        $('#axeCurrentHealth').css("width","50%");
+      } else if (book.player.axeHealth === 0) {
+        $('#axeCurrentHealth').css("width","0");
+        $('#axeTotalHealth').css("opacity","0.5");
+      }
     }, 100);
   }
   $('.start').click(function() {
