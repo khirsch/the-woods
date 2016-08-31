@@ -144,7 +144,7 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "Evil.", nextPass: 24, healthPass: -20},
-    {text: "Dark.", nextPass: 11, itemPass: ["hat"]}]
+    {text: "Darkness.", nextPass: 11, itemPass: ["hat"]}]
   ));
   owlPages.push(new Page(8,
     "Owl Encounter",
@@ -523,11 +523,13 @@ $(document).ready(function() {
         });
         $('.story').removeClass("fadeOut");
         $('.story').addClass("fadeIn");
-        if (book.player.axeHealth === 50) {
-          $('#axeCurrentHealth').css("width","50%");
-        } else if (book.player.axeHealth === 0) {
+        $('#axeCurrentHealth').css("width",book.player.axeHealth + "%");
+        if (book.player.axeHealth === 0) {
           $('#axeCurrentHealth').css("width","0");
-          $('#axeTotalHealth').css("opacity","0.5");
+          $('#axe').css("opacity","0.3");
+          $('#axe').show();
+        } else {
+          $('#axe').css("opacity","1");
         }
       }, 100);
     }
