@@ -9,13 +9,37 @@ The Woods is an interactive story with multiple endings. The reader's ending is 
 
 ## Specifications ##
 
-* The reader is able to interact with the story.
+* Selecting an option will return the next page.
+  * Example input: option 1
+  * Example output: page 2
 
-* The program stores the reader's choices as they progress through the story.
+* Some pages are randomly chosen.
+  * Example input: option 1
+  * Example output: random page
 
-* The story updates depending on the reader's choices.
+* Options can alter player's health.
+  * Example input: option 1
+  * Example output: player health decreases by 5
 
-* The story reaches a conclusion based upon the set of options chosen by the reader.
+* Options can alter player's inventory.
+  * Example input: option 1
+  * Example output: add item to inventory
+
+* Conditions attached to options can determine if options will succeed.
+  * Example input: true
+  * Example output: add item to inventory
+
+* Game ends if player health reaches zero.
+  * Example input: 0
+  * Example output: game over
+
+* Game ends if a certain page is reached.
+  * Example input: page 4
+  * Example output: game over
+
+* Reset option can reset the game.
+  * Example input: option 1
+  * Example output: page 0
 
 ## Setup/Installation Instructions ##
 
