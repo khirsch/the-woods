@@ -255,10 +255,10 @@ function setPages() {
   ));
   pages.push(new Page(14,
     "A Mysterious Stranger",
-    "The stranger accepts your water and in return gives you a map of the area.",
+    "The stranger accepts your water and in return offers you a map of the area.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Thank the stranger and continue on.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
+    [{text: "Thank the stranger and take the map.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
   ));
   pages.push(new Page(15,
     "YOU SURVIVED!",
@@ -309,15 +309,15 @@ function setPages() {
   ));
   pages.push(new Page(21,
     "The Mysterious Stranger",
-    "You use the axe to kill the mysterious stranger. It was a brief struggle, but you quickly overpower them. You see a knife by his side. What do you do?",
+    "You use the axe to kill the mysterious stranger. It was a brief struggle, but you quickly overpower them. You see a knife by their side. What do you do?",
     "img/page-icons/person.svg",
     false,
     [{text: "Take the knife.", nextPass: 19, itemPass: ["knife"]},
     {text: "Run away immediately.", nextPass: 19}]
   ));
   pages.push(new Page(22,
-    "The Mysterious Stranger",
-    "You fight the stranger with your bare hands. He pulls out a knife and swings wildly. What do you do?",
+    "A Mysterious Stranger",
+    "You fight the stranger with your bare hands. They pull out a knife and swing wildly. What do you do?",
     "img/page-icons/person.svg",
     false,
     [{text: "Run away.", nextPass: 19},
@@ -376,7 +376,11 @@ function setPages() {
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
+<<<<<<< HEAD
     "Your prayers were answered, and a park ranger patrolling the forest finds you. The ranger frees you from the bear trap and guides you out of the forest.",
+=======
+    "Your prayers were answered, and a park ranger patrolling the woods found you and saved you.",
+>>>>>>> mark_kat
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]

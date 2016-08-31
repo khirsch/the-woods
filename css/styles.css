@@ -42,10 +42,11 @@ li:hover {
 
 .container {
   display: block;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 30px 45px;
   width: 60%;
   max-width: 800px;
+  min-height: 350px;
   background-color: #ffffff;
   color: #000000;
   border-radius: 25px;
@@ -62,7 +63,7 @@ li:hover {
 
 .itemImg {
   width: 32px;
-  margin: 5px auto 10px;
+  margin: 10px auto;
 }
 
 .item {
@@ -76,7 +77,9 @@ li:hover {
   border: 1px dashed #000000;
   text-align: center;
   padding-top: 10px;
+  padding-bottom: 5px;
   border-radius: 20px;
+  min-height: 290px;
 }
 
 .stats h6 {
