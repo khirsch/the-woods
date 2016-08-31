@@ -338,7 +338,7 @@ function setPages() {
     "img/page-icons/woods.svg",
     false,
     [{text: "Follow the sound.", nextPass: 41},
-    {text: "Head in the opposite direction.", nextPass: 42}]
+    {text: "Head in the opposite direction.", nextPass: 42, win: true}]
   ));
   pages.push(new Page(24,
     "Owl Encounter",
@@ -469,8 +469,8 @@ function setPages() {
     "Following the sound, you find a waterfall. You glimpse an alcove beyond the falls.",
     "img/page-icons/waterfall.svg",
     true,
-    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000},
-    {text: "Follow the stream.", nextPass: 44}]
+    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000, reset: true},
+    {text: "Follow the stream.", nextPass: 44, win: true}]
   ));
   pages.push(new Page(42,
     "YOU SURVIVED!",
@@ -532,6 +532,8 @@ $(document).ready(function() {
   }
   function changePage() {
     if (book.startOver) {
+      $('body').css("background", "url('img/woods.jpg') no-repeat center center fixed");
+      $('body').css("background-size", "cover");
       book.reset();
       $('.book').fadeOut(function() {
         changePageInfo();
@@ -539,6 +541,12 @@ $(document).ready(function() {
       });
       loadStartPage();
     } else if (book.win) {
+      $('body').css("background", "url('img/sunrise.jpg') no-repeat center center fixed");
+      $('body').css("background-size", "cover");
+      changePageInfo();
+    } else if (book.gameOver) {
+      $('body').css("background", "url('img/graveyard.jpg') no-repeat center center fixed");
+      $('body').css("background-size", "cover");
       changePageInfo();
     } else {
       $('.story').addClass("fadeOut");
