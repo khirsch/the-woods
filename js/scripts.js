@@ -376,11 +376,7 @@ function setPages() {
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
-<<<<<<< HEAD
-    "Your prayers were answered, and a park ranger patrolling the forest finds you. The ranger frees you from the bear trap and guides you out of the forest.",
-=======
-    "Your prayers were answered, and a park ranger patrolling the woods found you and saved you.",
->>>>>>> mark_kat
+    "Your prayers were answered, and a park ranger patrolling the woods finds you. The ranger frees you from the bear trap and guides you out of the forest.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
