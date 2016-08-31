@@ -306,15 +306,15 @@ function setPages() {
     [{text: "Take the knife.", itemPass: ["knife"], nextPass: 19}]
   ));
   pages.push(new Page(21,
-    "The Mysterious Stranger",
-    "You use the axe to kill the mysterious stranger. You see a knife by his side.",
+    "A Mysterious Stranger",
+    "You use the axe to kill the mysterious stranger. You see a knife by their side.",
     "img/page-icons/person.svg",
     false,
     [{text: "Take the knife.", nextPass: 19}]
   ));
   pages.push(new Page(22,
-    "The Mysterious Stranger",
-    "You fight the stranger with your bare hands. He pulls out a knife and swings wildly. You barely manage to get away.",
+    "A Mysterious Stranger",
+    "You fight the stranger with your bare hands. They pull out a knife and swing wildly. You barely manage to get away.",
     "img/page-icons/person.svg",
     false,
     [{text: "Keep running.", nextPass: 19}]
@@ -370,7 +370,7 @@ function setPages() {
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
-    "Your prayers were answered, and a park ranger patrolling the forest found you and saved you.",
+    "Your prayers were answered, and a park ranger patrolling the woods found you and saved you.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
