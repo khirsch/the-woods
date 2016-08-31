@@ -2,6 +2,7 @@
 function Player () {
   this.alive = true;
   this.health = 100;
+  this.axeHealth = 100;
   this.inv = [];
 }
 
@@ -27,7 +28,6 @@ function Book (pages) {
 }
 
 Book.prototype.loadPage = function(option) {
-  // debugger;
   var outcome = true;
   var nextPage;
   if (option.test) {
@@ -40,12 +40,10 @@ Book.prototype.loadPage = function(option) {
     this.reset();
   }
   if (outcome) {
-    if(option.healthPass) {
-      if (book.player.invContains("amulet")) {
-        this.player.health += option.healthPass * 0.5;
-      } else {
-        this.player.health += option.healthPass;
-      }
+    if(option.healthPass && book.player.invContains("amulet")) {
+      this.player.health += option.healthPass * 0.5;
+    } else if (option.healthPass) {
+      this.player.health += option.healthPass;
     }
     if(option.itemPass) {
         this.player.inv = this.player.inv.concat(option.itemPass);
@@ -61,25 +59,30 @@ Book.prototype.loadPage = function(option) {
       this.player.inv = inv;
     }
   } else {
-    if(option.healthFail) {
-      if (book.player.invContains("amulet")) {
-        this.player.health += option.healthFail * 0.5;
-      } else {
-        this.player.health += option.healthFail;
-      }
-      if(option.itemRemoveFail) {
-        var inv = this.player.inv;
-        option.itemRemoveFail.forEach(function(item) {
-          if(inv.indexOf(item) >= 0) {
-            var location = inv.indexOf(item);
-            inv.splice(location, 1);
-          }
-        });
-        this.player.inv = inv;
-      }
+    if(option.healthFail && book.player.invContains("amulet")) {
+      this.player.health += option.healthFail * 0.5;
+    } else if (option.healthFail) {
+      this.player.health += option.healthFail;
+    }
+    if(option.itemRemoveFail) {
+      var inv = this.player.inv;
+      option.itemRemoveFail.forEach(function(item) {
+        if(inv.indexOf(item) >= 0) {
+          var location = inv.indexOf(item);
+          inv.splice(location, 1);
+        }
+      });
+      this.player.inv = inv;
     }
     if(option.itemFail) {
         this.player.inv = this.player.inv.concat(option.itemFail);
+    }
+  }
+  if (option.axeHealth) {
+    this.player.axeHealth += option.axeHealth;
+    if (this.player.axeHealth <= 0) {
+      var location = book.player.inv.indexOf("axe");
+      book.player.inv.splice(location, 1);
     }
   }
   if (this.player.health <= 0) {
@@ -196,7 +199,7 @@ function setPages() {
     "Upon entering the cave, you see a shrouded figure standing in the dark depths. He welcomes you in an alluring voice, and you can't help but notice his sharp fangs as he speaks. He's a vampire!",
     "img/page-icons/cave.svg",
     false,
-    [{text: "Attack him.", nextPass: 6, nextFail: 39, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
+    [{text: "Attack him.", nextPass: 6, nextFail: 39, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000, axeHealth: -50},
     {text: "Strike up a conversation.", nextPass: 17, itemPass: ["amulet"]}]
   ));
   pages.push(new Page(6,
@@ -228,7 +231,7 @@ function setPages() {
     "As you make your way through the woods, a zombie crashes out of the trees and lunges at you!",
     "img/page-icons/zombie.svg",
     false,
-    [{text: "Defend yourself!", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
+    [{text: "Defend yourself!", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60, axeHealth: -50}]
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
@@ -252,7 +255,7 @@ function setPages() {
     false,
     [{text: "Offer to trade your water bottle for help.", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
     {text: "Give the mushroom to them as a peace offering.", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
-    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"]}]
+    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"], axeHealth: -50}]
   ));
   pages.push(new Page(14,
     "A Mysterious Stranger",
@@ -325,10 +328,11 @@ function setPages() {
   ));
   pages.push(new Page(23,
     "The Woods",
-    "You try to use the knife to free yourself from the bear trap. Slowly but surely, you manage to take the trap apart. Exhausted, you see the sun rise in the distance.",
+    "You try to use the knife to free yourself from the bear trap. Slowly but surely, you manage to take the trap apart. Looking ahead, you see a fork in the road. What do you do?",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Stumble out of the woods.", nextPass: 4}]
+    [{text: "Go left towards a waterfall.", nextPass: 41, healthPass: -1000},
+    {text: "Go right towards something else.", nextPass: 42}]
   ));
   pages.push(new Page(24,
     "Owl Encounter",
@@ -336,7 +340,7 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "Run away from the owl.", nextPass: 10},
-    {text: "Try to fight the owl.", nextPass: 34, nextFail: 35, test: "book.player.invContains('axe')", healthPass: -10, healthFail: -20}]
+    {text: "Try to fight the owl.", nextPass: 34, nextFail: 35, test: "book.player.invContains('axe')", healthPass: -10, healthFail: -20, axeHealth: -50}]
   ));
   pages.push(new Page(25,
     "Zombie Attack",
@@ -453,6 +457,20 @@ function setPages() {
     false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
     {text: "Try to hide.", nextPass: 40, healthPass: -20}]
+  ));
+  pages.push(new Page(41,
+    "YOU DIED!",
+    "You try to explore the waterfall, but the rocks proved too slippery. You fall and break your neck.",
+    "img/page-icons/rip.svg",
+    true,
+    [{text: "Start over?", nextPass: 0, reset: true}]
+  ));
+  pages.push(new Page(42,
+    "YOU SURVIVED!",
+    "You stuble down the path. You see the sun rising in the distance. Slowly you exit the forest.",
+    "img/page-icons/sunrise.svg",
+    true,
+    [{text: "Start over?", nextPass: 0, reset: true}]
   ));
   return pages;
 }
