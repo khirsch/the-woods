@@ -25,6 +25,7 @@ function Book (pages) {
   this.player = new Player();
   this.gameOver = false;
   this.startOver = false;
+  this.win = false;
 }
 
 Book.prototype.loadPage = function(option) {
@@ -35,6 +36,9 @@ Book.prototype.loadPage = function(option) {
   }
   if(option.gameOver === true) {
     this.gameOver = true;
+  }
+  if (option.win && outcome) {
+    this.win = true;
   }
   if (option.reset) {
     this.startOver = true;
@@ -125,6 +129,7 @@ Book.prototype.reset = function() {
   this.gameOver = false;
   this.pages = setPages();
   this.startOver = false;
+  this.win = false;
 }
 
 function setPages() {
@@ -134,7 +139,7 @@ function setPages() {
     "An owl flies over and lands on a branch near your head. He gives you the following riddle: Three playing cards in a row. Can you name them with these clues? There is a Two to the right of a King. A Diamond will be found to the left of a Spade. An Ace is to the left of a Heart. A Heart is to the left of a Spade. What is your answer?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Ace of Diamonds, King of Hearts, Two of Spades.", nextPass: 11, itemPass: ["hat"]},
+    [{text: "Ace of Diamonds, King of Hearts, Two of Spades.", nextPass: 11, itemPass: ["hat"], win: true},
     {text: "King of Hearts, Ace of Diamonds, Two of Spades.", nextPass: 24, healthPass: -20}]
   ));
   owlPages.push(new Page(8,
@@ -143,14 +148,14 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "Evil.", nextPass: 24, healthPass: -20},
-    {text: "Darkness.", nextPass: 11, itemPass: ["hat"]}]
+    {text: "Darkness.", nextPass: 11, itemPass: ["hat"], win: true}]
   ));
   owlPages.push(new Page(8,
     "Owl Encounter",
     "An owl flies over and lands on a branch near your head. He gives you the following riddle: Alive without breath, as cold as death. Never thirsty, ever drinking. All in mail, never clinking. What is your answer?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Fish.", nextPass: 11, itemPass: ["hat"]},
+    [{text: "Fish.", nextPass: 11, itemPass: ["hat"], win: true},
     {text: "Vampire.", nextPass: 24, healthPass: -20}]
   ));
   var rand = Math.round(Math.random()*2);
@@ -263,7 +268,7 @@ function setPages() {
     "The stranger accepts your water and in return offers you a map of the area.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Thank the stranger and take the map.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
+    [{text: "Thank the stranger and take the map.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')", win: true}]
   ));
   pages.push(new Page(15,
     "YOU SURVIVED!",
@@ -301,7 +306,7 @@ function setPages() {
     "img/page-icons/woods.svg",
     false,
     [{text: "Try to use the knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
-    {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
+    {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000, win: true}]
   ));
   pages.push(new Page(20,
     "A Mysterious Stranger",
@@ -333,7 +338,7 @@ function setPages() {
     "img/page-icons/woods.svg",
     false,
     [{text: "Go left towards a waterfall.", nextPass: 41, healthPass: -1000},
-    {text: "Go right towards something else.", nextPass: 42}]
+    {text: "Go right towards something else.", nextPass: 42, win: true}]
   ));
   pages.push(new Page(24,
     "Owl Encounter",
@@ -420,7 +425,7 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "Run away!", nextPass: 10},
-    {text: "Keep fighting the owl.", nextPass: 37, nextFail: 38, healthPass: -20, healthFail: -20, itemPass: ["hat"], test: "Math.random() > 0.5"}]
+    {text: "Keep fighting the owl.", nextPass: 37, nextFail: 38, healthPass: -20, healthFail: -20, itemPass: ["hat"], test: "Math.random() > 0.5", win: true}]
   ));
   pages.push(new Page(36,
     "Ghost Attack",
@@ -518,6 +523,8 @@ $(document).ready(function() {
         $('.title').fadeIn();
       });
       loadStartPage();
+    } else if (book.win) {
+      changePageInfo();
     } else {
       $('.story').addClass("fadeOut");
       setTimeout(function() {
