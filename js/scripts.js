@@ -27,6 +27,7 @@ function Book (pages) {
 }
 
 Book.prototype.loadPage = function(option) {
+  // debugger;
   var outcome = true;
   var nextPage;
   if (option.test) {
@@ -196,7 +197,7 @@ function setPages() {
     "Upon entering the cave, you see a shrouded figure standing in the dark depths of the cave. He welcomes you in an alluring voice, and you can't help but notice his sharp fangs as he speaks. He's a vampire!",
     "img/page-icons/cave.svg",
     false,
-    [{text: "Attack him.", nextPass: 6, nextFail: 2, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
+    [{text: "Attack him.", nextPass: 6, nextFail: 39, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000},
     {text: "Strike up a conversation.", nextPass: 17, itemPass: ["amulet"]}]
   ));
   pages.push(new Page(6,
@@ -421,7 +422,7 @@ function setPages() {
     "Ghost Attack",
     "The ghost ignores your plea. What do you do?",
     "img/page-icons/ghost.svg",
-    true,
+    false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
     {text: "Try to talk to the ghost again.", nextPass: 36, healthPass: -20}]
   ));
@@ -429,7 +430,7 @@ function setPages() {
     "YOU SURVIVED!",
     "You successfully killed the owl with your bare hands. You find a magical hat. You put on the hat and it teleports you out of the forest.",
     "img/page-icons/sunrise.svg",
-    false,
+    true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(38,
@@ -438,6 +439,13 @@ function setPages() {
     "img/page-icons/woods.svg",
     false,
     [{text: "Keep exploring.", nextPass: 10}]
+  ));
+  pages.push(new Page(39,
+    "YOU DIED!",
+    "The vampire proved to be more than you could handle.",
+    "img/page-icons/rip.svg",
+    true,
+    [{text: "Try again?", nextPass: 0, reset: 'true'}]
   ));
   return pages;
 }
