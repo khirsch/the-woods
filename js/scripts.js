@@ -166,7 +166,7 @@ function setPages() {
   ));
   pages.push(new Page(1,
     "The Woods",
-    "You run into the woods and soon realize that you've lost your sense of direction! Now what?",
+    "You run into the woods and soon realize that you've lost your sense of direction. Now what?",
     "img/page-icons/woods.svg",
     false,
     [{text: "Try to find your way back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
@@ -255,7 +255,7 @@ function setPages() {
     false,
     [{text: "Offer to trade your water bottle for help.", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
     {text: "Give the mushroom to them as a peace offering.", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
-    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, itemPass: ["knife"], axeHealth: -50}]
+    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, axeHealth: -50}]
   ));
   pages.push(new Page(14,
     "A Mysterious Stranger",
@@ -304,7 +304,7 @@ function setPages() {
   ));
   pages.push(new Page(20,
     "A Mysterious Stranger",
-    "The mysterious stranger eats the mushroom. The mushroom turned out to be poisonous! The mysterious stranger chokes and dies. You see a knife at their side. Do you pick it up?",
+    "The mysterious stranger eats the mushroom. As it turns out, it was poisonous! The stranger chokes and dies. You see a knife at their side. Do you pick it up?",
     "img/page-icons/person.svg",
     false,
     [{text: "Yes, it may be useful.", itemPass: ["knife"], nextPass: 19},
