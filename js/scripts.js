@@ -129,8 +129,8 @@ function setPages() {
     "You meet an owl. He gives you the following riddle: Three playing cards in a row. Can you name them with these clues? There is a two to the right of a king. A diamond will be found to the left of a spade. An ace is to the left of a heart. A heart is to the left of a spade. Now, identify all three cards. What is your answer?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Ace of Diamonds, King of Hearts, Two of Spades", nextPass: 11, itemPass: ["hat"]},
-    {text: "King of Hearts, Ace of Diamonds, Two of Spades", nextPass: 24, healthPass: -20}]
+    [{text: "Ace of Diamonds, King of Hearts, Two of Spades.", nextPass: 11, itemPass: ["hat"]},
+    {text: "King of Hearts, Ace of Diamonds, Two of Spades.", nextPass: 24, healthPass: -20}]
   ));
   owlPages.push(new Page(8,
     "Owl Encounter",
@@ -138,16 +138,16 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
 
-    [{text: "evil", nextPass: 24, healthPass: -20},
-    {text: "dark", nextPass: 11, itemPass: ["hat"]}]
+    [{text: "Evil.", nextPass: 24, healthPass: -20},
+    {text: "Dark.", nextPass: 11, itemPass: ["hat"]}]
   ));
   owlPages.push(new Page(8,
     "Owl Encounter",
     "You meet an owl. He gives you the following riddle: Alive without breath, as cold as death; Never thirsty, ever drinking, all in mail never clinking. What is your answer?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "fish", nextPass: 11, itemPass: ["hat"]},
-    {text: "armour", nextPass: 24, healthPass: -20}]
+    [{text: "Fish.", nextPass: 11, itemPass: ["hat"]},
+    {text: "Vampire.", nextPass: 24, healthPass: -20}]
   ));
   var rand = Math.round(Math.random()*2);
   var owlPage = owlPages[rand];
@@ -163,7 +163,7 @@ function setPages() {
   ));
   pages.push(new Page(1,
     "The Woods",
-    "You run into the woods with nothing but a lighter in your pocket. You soon realize that you've lost your sense of direction. You are lost! Now what?",
+    "You run into the woods and soon realize that you've lost your sense of direction! Now what?",
     "img/page-icons/woods.svg",
     false,
     [{text: "Try to find your way back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
