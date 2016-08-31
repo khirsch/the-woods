@@ -141,6 +141,12 @@ li:hover {
   width: 20%;
 }
 
+.title h1,
+.title #mainSubtitle,
+.title #character {
+  display: none;
+}
+
 @-webkit-keyframes swing
 {
     15%
