@@ -534,6 +534,7 @@ $(document).ready(function() {
   }
   function changePage() {
     if (book.startOver) {
+      $('hr').hide();
       $('body').css("background", "url('img/woods.jpg') no-repeat center center fixed");
       $('body').css("background-size", "cover");
       book.reset();
@@ -568,6 +569,7 @@ $(document).ready(function() {
     }
   }
   $('.start').click(function() {
+    $('hr').show();
     $('.title').hide();
     $('.book').show();
     $('.bottomLine').show();
