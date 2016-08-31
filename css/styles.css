@@ -216,6 +216,7 @@ li:hover {
 
   .stats {
     margin-top: 25px;
+    min-height: 185px;
   }
 
   .item {
