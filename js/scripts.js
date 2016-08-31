@@ -471,7 +471,7 @@ function setPages() {
     "Following the sound, you find a waterfall. You glimpse an alcove beyond the falls.",
     "img/page-icons/waterfall.svg",
     true,
-    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000, reset: true},
+    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000},
     {text: "Follow the stream.", nextPass: 44, win: true}]
   ));
   pages.push(new Page(42,
