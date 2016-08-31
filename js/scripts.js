@@ -330,11 +330,11 @@ function setPages() {
   ));
   pages.push(new Page(23,
     "The Woods",
-    "You try to use the knife to free yourself from the bear trap. Slowly but surely, you manage to take the trap apart. Looking ahead, you see a fork in the road. What do you do?",
+    "You try to use the knife to free yourself. Slowly but surely, you manage to take the trap apart. You hear the sound of rushing water nearby.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Go left towards a waterfall.", nextPass: 41, healthPass: -1000},
-    {text: "Go right towards something else.", nextPass: 42}]
+    [{text: "Follow the sound.", nextPass: 41},
+    {text: "Head in the opposite direction.", nextPass: 42}]
   ));
   pages.push(new Page(24,
     "Owl Encounter",
@@ -461,15 +461,30 @@ function setPages() {
     {text: "Try to hide.", nextPass: 40, healthPass: -20}]
   ));
   pages.push(new Page(41,
+    "The Waterfall",
+    "Following the sound, you find a waterfall. You glimpse an alcove beyond the falls.",
+    "img/page-icons/waterfall.svg",
+    true,
+    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000},
+    {text: "Follow the stream.", nextPass: 44}]
+  ));
+  pages.push(new Page(42,
+    "YOU SURVIVED!",
+    "You stumble down the path. You see the sun rising in the distance and make your way out of the woods.",
+    "img/page-icons/sunrise.svg",
+    true,
+    [{text: "Start over?", nextPass: 0, reset: true}]
+  ));
+  pages.push(new Page(43,
     "YOU DIED!",
-    "You try to explore the waterfall, but the rocks proved too slippery. You fall and break your neck.",
+    "As you navigate towards the alcove, the rocks prove too slippery. You fall and break your neck.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Start over?", nextPass: 0, reset: true}]
   ));
-  pages.push(new Page(42,
+  pages.push(new Page(44,
     "YOU SURVIVED!",
-    "You stumble down the path. You see the sun rising in the distance, and make your way out of the woods.",
+    "You follow the stream, which just so happens to be a way out of the woods.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Start over?", nextPass: 0, reset: true}]
