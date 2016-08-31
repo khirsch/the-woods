@@ -376,7 +376,7 @@ function setPages() {
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
-    "Your prayers were answered, and a park ranger patrolling the woods finds you. The ranger frees you from the bear trap and guides you out of the woods.",
+    "Your prayers were answered! A park ranger patrolling the woods has found you. The ranger frees you from the bear trap and guides you out of the woods.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Start over?", nextPass: 0, reset: true}]
@@ -404,7 +404,7 @@ function setPages() {
   ));
   pages.push(new Page(34,
     "Owl Encounter",
-    "You swing your axe at the owl. The owl disappers into the night.",
+    "You swing your axe at the owl. The owl disappears into the night.",
     "img/page-icons/owl.svg",
     false,
     [{text: "Keep exploring.", nextPass: 10}]
@@ -414,7 +414,7 @@ function setPages() {
     "You fight the owl with your bare hands. The owl continues to rip into your flesh with its talons. What do you do?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Run away.", nextPass: 10},
+    [{text: "Run away!", nextPass: 10},
     {text: "Keep fighting the owl.", nextPass: 37, nextFail: 38, healthPass: -20, healthFail: -20, itemPass: ["hat"], test: "Math.random() > 0.5"}]
   ));
   pages.push(new Page(36,
@@ -423,11 +423,11 @@ function setPages() {
     "img/page-icons/ghost.svg",
     false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
-    {text: "Close your eyes and hope he goes away.", nextPass: 40, healthPass: -20}]
+    {text: "Close your eyes and hope it goes away.", nextPass: 40, healthPass: -20}]
   ));
   pages.push(new Page(37,
     "YOU SURVIVED!",
-    "You successfully killed the owl with your bare hands. You find a magical hat. You put on the hat and it teleports you out of the woods.",
+    "You successfully killed the owl with your bare hands. You find a conical hat. You put on the hat and it teleports you out of the woods.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Start over?", nextPass: 0, reset: true}]
@@ -444,7 +444,7 @@ function setPages() {
     "The vampire proved to be more than you could handle.",
     "img/page-icons/rip.svg",
     true,
-    [{text: "Try again?", nextPass: 0, reset: 'true'}]
+    [{text: "Start over?", nextPass: 0, reset: 'true'}]
   ));
   pages.push(new Page(40,
     "Ghost Attack",
@@ -452,7 +452,7 @@ function setPages() {
     "img/page-icons/ghost.svg",
     false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
-    {text: "Close your eyes and hope he goes away.", nextPass: 40, healthPass: -20}]
+    {text: "Try to hide.", nextPass: 40, healthPass: -20}]
   ));
   return pages;
 }
