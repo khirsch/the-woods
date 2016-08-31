@@ -322,7 +322,7 @@ function setPages() {
     "img/page-icons/person.svg",
     false,
     [{text: "Run away.", nextPass: 19},
-    {text: "Keep fighting.", nextPass: 33}]
+    {text: "Keep fighting.", nextPass: 33, healthPass: -1000}]
   ));
   pages.push(new Page(23,
     "The Woods",
@@ -366,7 +366,7 @@ function setPages() {
     "img/page-icons/ghost.svg",
     true,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
-    {text: "Try to talk to the ghost.", nextPass: 36, healthPass: -20}]
+    {text: "Beg for mercy.", nextPass: 36, healthPass: -20}]
   ));
   pages.push(new Page(29,
     "YOU DIED!",
@@ -424,7 +424,7 @@ function setPages() {
     "img/page-icons/ghost.svg",
     false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
-    {text: "Try to talk to the ghost again.", nextPass: 36, healthPass: -20}]
+    {text: "Close your eyes and hope he goes away.", nextPass: 40, healthPass: -20}]
   ));
   pages.push(new Page(37,
     "YOU SURVIVED!",
@@ -447,6 +447,14 @@ function setPages() {
     true,
     [{text: "Try again?", nextPass: 0, reset: 'true'}]
   ));
+  pages.push(new Page(40,
+    "Ghost Attack",
+    "The ghost continues to attack you. What do you do?",
+    "img/page-icons/ghost.svg",
+    false,
+    [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
+    {text: "Close your eyes and hope he goes away.", nextPass: 40, healthPass: -20}]
+  ));
   return pages;
 }
 var book = new Book(setPages());
@@ -454,25 +462,30 @@ var book = new Book(setPages());
 // Front end logic
 $(document).ready(function() {
   function changePage() {
-    $('#subtitle').text(book.currentPage.subtitle);
-    $('#prompt').text(book.currentPage.prompt);
-    $('#storyImg').attr("src", book.currentPage.img);
-    $('#healthbar').css("width", book.player.health + "%");
-    if (book.player.health < 25) {
-      $('#healthbar').css("background-color", "#990000");
-    } else {
-      $('#healthbar').css("background-color", "#718059");
-    }
-    $('.item').hide();
-    book.player.inv.forEach(function(item) {
-      $("#" + item).show();
-    });
-    $('li').hide();
-    book.currentPage.options.forEach(function(option, i) {
-      $('#option' + i).show();
-      $('#option' + i).attr("value", book.currentPage.number);
-      $('#option' + i).text(book.currentPage.options[i].text);
-    });
+    $('.story').addClass("fadeOut");
+    setTimeout(function() {
+      $('#subtitle').text(book.currentPage.subtitle);
+      $('#prompt').text(book.currentPage.prompt);
+      $('#storyImg').attr("src", book.currentPage.img);
+      $('#healthbar').css("width", book.player.health + "%");
+      if (book.player.health < 25) {
+        $('#healthbar').css("background-color", "#990000");
+      } else {
+        $('#healthbar').css("background-color", "#718059");
+      }
+      $('.item').hide();
+      book.player.inv.forEach(function(item) {
+        $("#" + item).show();
+      });
+      $('li').hide();
+      book.currentPage.options.forEach(function(option, i) {
+        $('#option' + i).show();
+        $('#option' + i).attr("value", book.currentPage.number);
+        $('#option' + i).text(book.currentPage.options[i].text);
+      });
+      $('.story').removeClass("fadeOut");
+      $('.story').addClass("fadeIn");
+    }, 100);
   }
   $('.start').click(function() {
     $('.title').hide();
