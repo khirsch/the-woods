@@ -178,7 +178,7 @@ function setPages() {
   ));
   pages.push(new Page(3,
     "The Woods",
-    "You stop in a clearing to catch your breath. In the near distance, you notice a cave. Do you...",
+    "You stop in a clearing to catch your breath. In the near distance, you notice a cave.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Make for the cave.", nextPass: 5},
@@ -228,7 +228,7 @@ function setPages() {
     "As you make your way through the woods, a zombie crashes out of the trees and lunges at you!",
     "img/page-icons/zombie.svg",
     false,
-    [{text: "Defend yourself!", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
+    [{text: "Defend yourself.", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
@@ -239,7 +239,7 @@ function setPages() {
   ));
   pages.push(new Page(12,
     "A Mysterious Stranger",
-    "As you look ahead through the trees, you notice a mysterious stranger sitting under a tree. What do you do?",
+    "As you look ahead through the trees, you notice a mysterious stranger sitting in a clearing. What do you do?",
     "img/page-icons/person.svg",
     false,
     [{text: "Confront them.", nextPass: 13},
@@ -270,7 +270,7 @@ function setPages() {
   ));
   pages.push(new Page(16,
     "Zombie Attack",
-    "Quick on your feet, you the dodge the zombie and subdue it with a swing of your axe.",
+    "Quick on your feet, you dodge the zombie and subdue it with a swing of your axe.",
     "img/page-icons/zombie.svg",
     false,
     [{text: "Continue on.", nextPass: 12}]
@@ -285,7 +285,7 @@ function setPages() {
   ));
   pages.push(new Page(18,
     "The Cave",
-    "You explore deeper into the cave and you come to a dead end. On the ground below you, you find a patch of mushrooms. You pick one up to examine it. It looks odd. What do you do with it?",
+    "You explore deeper into the cave and you come to a dead end. On the ground, you find a patch of mushrooms. You pick one up to examine it. It looks odd. What do you do with it?",
     "img/page-icons/cave.svg",
     false,
     [{text: "Place the mushroom in your pocket and leave the cave.", nextPass: 10},
@@ -293,10 +293,10 @@ function setPages() {
   ));
   pages.push(new Page(19,
     "The Woods",
-    "Stumbling from fear, you continue deeper into the woods. In your haste to get away, you fall into a bear trap.",
+    "Stumbling from fear, you continue deeper into the woods. Caught unaware, you fall into a bear trap!",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Try to use your knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
+    [{text: "Try to use the knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
     {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
   ));
   pages.push(new Page(20,
@@ -340,7 +340,7 @@ function setPages() {
   ));
   pages.push(new Page(25,
     "Zombie Attack",
-    "You have nothing to fight off the zombies with but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life.",
+    "You have nothing to fight off the zombies with but your own two fists. You try punching a zombie. It does not go well, but you still manage to escape.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Keep going.", nextPass: 12}]
@@ -419,7 +419,7 @@ function setPages() {
   ));
   pages.push(new Page(36,
     "Ghost Attack",
-    "The ghost ignores your plea. What do you do?",
+    "The ghost ignores your plea and begins to attack you. What do you do?",
     "img/page-icons/ghost.svg",
     false,
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
