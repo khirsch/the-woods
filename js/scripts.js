@@ -2,7 +2,7 @@
 function Player () {
   this.alive = true;
   this.health = 100;
-  this.inv = ["lighter"];
+  this.inv = [];
 }
 
 Player.prototype.invContains = function(item) {
@@ -152,30 +152,6 @@ function setPages() {
   var rand = Math.round(Math.random()*2);
   var owlPage = owlPages[rand];
 
-  var randomPages = [];
-  randomPages.push(new Page(10,
-    "subtitle",
-    "you encounter a gnome",
-    "img/page-icons/gnome.svg",
-    false,
-    [{text: "run away", nextPass: 31, nextFail: 12, test: "book.player.invContains('amulet') || book.player.invContains('compass')", itemRemovePass: ["amulet", "compass"]}]
-  ));
-  randomPages.push(new Page(10,
-    "subtitle",
-    "Attacked by zombies",
-    "img/page-icons/zombie.svg",
-    false,
-    [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
-  ));
-
-  var rand;
-  if (Math.random() > 0.8) {
-    rand = 0;
-  } else {
-    rand = 1;
-  }
-  var randomPage = randomPages[rand];
-
   var pages = [];
   pages.push(new Page(0,
     "Zombie Attack",
@@ -246,7 +222,13 @@ function setPages() {
     false,
     [{text: "Explore the lodge.", nextPass: 28, healthPass: -20, itemPass: ["compass", "water"]}]
   ));
-  pages.push(randomPage);
+  pages.push(new Page(10,
+    "subtitle",
+    "Attacked by zombies",
+    "img/page-icons/zombie.svg",
+    false,
+    [{text: "fight the zombies", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60}]
+  ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
     "You received a magical hat and teleported out of the forest.",
@@ -298,7 +280,7 @@ function setPages() {
     "The vampire senses your despiration. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance.",
     "img/page-icons/vampire.svg",
     false,
-    [{text: "Leave the cave.", nextPass: 10}]
+    [{text: "Leave the cave.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
   ));
   pages.push(new Page(18,
     "The Cave",
@@ -349,7 +331,7 @@ function setPages() {
     "Wrong answer! The owl is enraged and attacks you with his sharp talons. Feathers are flying everywhere.",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Run away from the owl.", display: "true", nextPass: 10}]
+    [{text: "Run away from the owl.", nextPass: 10}]
   ));
   pages.push(new Page(25,
     "Zombie Attack",
@@ -377,7 +359,7 @@ function setPages() {
     "you were attacked by a ghost.",
     "img/page-icons/ghost.svg",
     true,
-    [{text: "Run away, again.", nextPass: 10}]
+    [{text: "Run away, again.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
   ));
   pages.push(new Page(29,
     "YOU DIED!",
@@ -396,9 +378,9 @@ function setPages() {
   pages.push(new Page(31,
     "Gnome Encounter",
     "The gnome ran away as quickly as it appeared. You glance at your bag and notice something is missing. The gnome took an item!",
-    "img/page-icons/sunrise.svg",
+    "img/page-icons/gnome.svg",
     false,
-    [{text: "Keep exploring the woods.", nextPass: 12}]
+    [{text: "Keep exploring.", nextPass: 12}]
   ));
   pages.push(new Page(32,
     "YOU DIED!",
