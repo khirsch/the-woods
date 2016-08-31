@@ -16,7 +16,6 @@ function Page (number, subtitle, prompt, img, gameOverPage, options) {
   this.img = img;
   this.gameOverPage = gameOverPage;
   this.options = options;
-
 }
 
 function Book (pages) {
@@ -131,15 +130,16 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "Ace of Diamonds, King of Hearts, Two of Spades", nextPass: 11, itemPass: ["hat"]},
-    {text: "King of Hearts, Ace of Diamonds, Two of Spades", nextPass: 24, healthPass: -40}]
+    {text: "King of Hearts, Ace of Diamonds, Two of Spades", nextPass: 24, healthPass: -20}]
   ));
   owlPages.push(new Page(8,
     "subtitle",
     "You meet an owl. He gives you the following riddle: It cannot be seen, cannot be felt, cannot be heard, cannot be smelt. It lies behind stars and under hills, and empty holes it fills. It comes first and follows after, ends life, kills laughter. What is your answer?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "dark", nextPass: 11, itemPass: ["hat"]},
-    {text: "evil", nextPass: 24, healthPass: -40}]
+
+    [{text: "evil", nextPass: 24, healthPass: -20},
+    {text: "dark", nextPass: 11, itemPass: ["hat"]}]
   ));
   owlPages.push(new Page(8,
     "subtitle",
@@ -147,7 +147,7 @@ function setPages() {
     "img/page-icons/owl.svg",
     false,
     [{text: "fish", nextPass: 11, itemPass: ["hat"]},
-    {text: "armour", nextPass: 24, healthPass: -40}]
+    {text: "armour", nextPass: 24, healthPass: -20}]
   ));
   var rand = Math.round(Math.random()*2);
   var owlPage = owlPages[rand];
@@ -277,14 +277,15 @@ function setPages() {
   ));
   pages.push(new Page(17,
     "Vampire Encounter",
-    "The vampire senses your despiration. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance.",
+    "The vampire senses your despiration. He gives you a shiny amulet from around his neck. It looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance. What do you do?",
     "img/page-icons/vampire.svg",
     false,
-    [{text: "Leave the cave.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
+    [{text: "Run out of the cave immediately.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.7 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
+    {text: "Thank the vampire and leave the cave.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.9 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
   ));
   pages.push(new Page(18,
     "The Cave",
-    "You run deeper into the cave and you come to a dead end. On the ground below you, you find a patch of mushrooms. You pick one up to examine it.",
+    "You run deeper into the cave and you come to a dead end. On the ground below you, you find a patch of mushrooms. You pick one up to examine it. It looks odd. What will you do with it?",
     "img/page-icons/cave.svg",
     false,
     [{text: "Place the mushroom in your pocket, and leave the cave.", nextPass: 10},
@@ -292,57 +293,61 @@ function setPages() {
   ));
   pages.push(new Page(19,
     "The Woods",
-    "Stumbling from fear, you continue deeper into the forest. In your haste to get away, you fall into a bear trap.",
+    "Stumbling from fear, you continue deeper into the forest. In your haste to get away, you fall into a bear trap. What do you do?",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Use your knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
+    [{text: "Try to use your knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
     {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000}]
   ));
   pages.push(new Page(20,
     "The Mysterious Stranger",
-    "The mysterious stranger eats your mushroom. The mushroom turned out to be poisoned! The mysterious stranger dies. You see a knife at his side",
+    "The mysterious stranger eats your mushroom. The mushroom turned out to be poisoned! The mysterious stranger chokes and dies. You see a knife at his side. What do you do?",
     "img/page-icons/person.svg",
     false,
-    [{text: "Take the knife.", itemPass: ["knife"], nextPass: 19}]
+    [{text: "Take the knife.", itemPass: ["knife"], nextPass: 19},
+    {text: "Run away immediately.", nextPass: 19}]
   ));
   pages.push(new Page(21,
     "The Mysterious Stranger",
-    "You use the axe to kill the mysterious stranger. You see a knife by his side.",
+    "You use the axe to kill the mysterious stranger. It was a brief struggle, but you quickly overpower them. You see a knife by his side. What do you do?",
     "img/page-icons/person.svg",
     false,
-    [{text: "Take the knife.", nextPass: 19}]
+    [{text: "Take the knife.", nextPass: 19, itemPass: ["knife"]},
+    {text: "Run away immediately.", nextPass: 19}]
   ));
   pages.push(new Page(22,
     "The Mysterious Stranger",
-    "You fight the stranger with your bare hands. He pulls out a knife and swings wildly. You barely manage to get away.",
+    "You fight the stranger with your bare hands. He pulls out a knife and swings wildly. What do you do?",
     "img/page-icons/person.svg",
     false,
-    [{text: "Keep running.", nextPass: 19}]
+    [{text: "Run away.", nextPass: 19},
+    {text: "Keep fighting.", nextPass: 33}]
   ));
   pages.push(new Page(23,
     "The Woods",
-    "You use the knife to free yourself from the bear trap. Exhausted, you see an exit from the forest.",
+    "You try to use the knife to free yourself from the bear trap. Slowly and painfully, you eventually manage to take the trap apart. Exhausted, you see the sun rise in the distance.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Stumble out of forest.", nextPass: 4}]
   ));
   pages.push(new Page(24,
     "Owl Encounter",
-    "Wrong answer! The owl is enraged and attacks you with his sharp talons. Feathers are flying everywhere.",
+    "Wrong answer! The owl is enraged and attacks you with his sharp talons. Feathers are flying everywhere. What do you do?",
     "img/page-icons/owl.svg",
     false,
-    [{text: "Run away from the owl.", nextPass: 10}]
+    [{text: "Run away from the owl.", nextPass: 10},
+    {text: "Try to fight the owl.", nextPass: 34, nextFail: 35, test: "book.player.invContains('axe')", healthPass: -10, healthFail: -20}]
   ));
   pages.push(new Page(25,
     "Zombie Attack",
-    "You have nothing to fight off the zombies with, but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life",
+    "You have nothing to fight off the zombies with, but your own two fists. You try punching a zombie. It does not go well. You barely escape with your life.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Keep running.", nextPass: 12}]
   ));
   pages.push(new Page(26,
     "YOU DIED!",
-    "Oh no! The mushroom turned out to be poisoned. You died.",
+    "Oh no! The mushroom turned out to be poisoned. You choke and sputter, falling to the ground.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
@@ -356,21 +361,22 @@ function setPages() {
   ));
   pages.push(new Page(28,
     "Ghost Attack",
-    "you were attacked by a ghost.",
+    "You find the vengeful ghost of a former ranger. The room suddenly feels freezing. Objects fly everywhere. What do you do?",
     "img/page-icons/ghost.svg",
     true,
-    [{text: "Run away, again.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]}]
+    [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
+    {text: "Try to talk to the ghost.", nextPass: 36, healthPass: -20}]
   ));
   pages.push(new Page(29,
     "YOU DIED!",
-    "The zombies caught up with you before anyone came to help.",
+    "You wait for what seems like ages. A noise comes from over the ridge. The zombie horde catches up with you again.",
     "img/page-icons/rip.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
   ));
   pages.push(new Page(30,
     "YOU SURVIVED!",
-    "Your prayers were answered, and a park ranger patrolling the forest found you and saved you.",
+    "Your prayers were answered, and a park ranger patrolling the forest finds you. The ranger frees you from the bear trap and guides you out of the forest.",
     "img/page-icons/sunrise.svg",
     true,
     [{text: "Play again?", nextPass: 0, reset: true}]
@@ -388,6 +394,50 @@ function setPages() {
     "img/page-icons/rip.svg",
     true,
     [{text: "Try again?", nextPass: 0, reset: 'true'}]
+  ));
+  pages.push(new Page(33,
+    "YOU DIED!",
+    "The mysterious stranger proved to be more than you could handle.",
+    "img/page-icons/rip.svg",
+    true,
+    [{text: "Try again?", nextPass: 0, reset: 'true'}]
+  ));
+  pages.push(new Page(34,
+    "Owl Encounter",
+    "You swing your axe at the owl. The owl disappers into the night.",
+    "img/page-icons/owl.svg",
+    false,
+    [{text: "Keep exploring.", nextPass: 10}]
+  ));
+  pages.push(new Page(35,
+    "Owl Encounter",
+    "You fight the owl with your bare hands. The owl continues to rip into your flesh with its talons. What do you do?",
+    "img/page-icons/owl.svg",
+    false,
+    [{text: "Run away.", nextPass: 10},
+    {text: "Keep fighting the owl.", nextPass: 37, nextFail: 38, healthPass: -20, healthFail: -20, itemPass: ["hat"], test: "Math.random() > 0.5"}]
+  ));
+  pages.push(new Page(36,
+    "Ghost Attack",
+    "The ghost ignores your plea. What do you do?",
+    "img/page-icons/ghost.svg",
+    true,
+    [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
+    {text: "Try to talk to the ghost again.", nextPass: 36, healthPass: -20}]
+  ));
+  pages.push(new Page(37,
+    "YOU SURVIVED!",
+    "You successfully killed the owl with your bare hands. You find a magical hat. You put on the hat and it teleports you out of the forest.",
+    "img/page-icons/sunrise.svg",
+    false,
+    [{text: "Play again?", nextPass: 0, reset: true}]
+  ));
+  pages.push(new Page(38,
+    "Owl Encounter",
+    "You successfully killed the owl with your bare hands.",
+    "img/page-icons/woods.svg",
+    false,
+    [{text: "Keep exploring.", nextPass: 10}]
   ));
   return pages;
 }
