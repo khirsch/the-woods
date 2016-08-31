@@ -168,7 +168,8 @@ li:hover {
 
 .title h1,
 .title #mainSubtitle,
-.title #character {
+.title #character,
+hr {
   display: none;
 }
 
