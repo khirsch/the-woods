@@ -237,7 +237,8 @@ function setPages() {
     "As you make your way through the woods, a zombie crashes out of the trees and lunges at you!",
     "img/page-icons/zombie.svg",
     false,
-    [{text: "Defend yourself.", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60, axeHealth: -50}]
+    [{text: "Defend yourself.", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60, axeHealth: -50},
+    {text: "Cower in fear.", nextPass: 32, healthPass: -1000}]
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
@@ -261,7 +262,8 @@ function setPages() {
     false,
     [{text: "Offer to trade your water bottle for help.", nextPass: 14, display: "book.player.invContains('water')", itemRemovePass: ["water"]},
     {text: "Give the mushroom to them as a peace offering.", nextPass: 20, display: "book.player.invContains('mushroom')", itemRemovePass: ["mushroom"]},
-    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, axeHealth: -50}]
+    {text: "Attack them. Better safe than sorry!", test: "book.player.invContains('axe')" , nextPass: 21, nextFail: 22, healthFail: -40, healthPass: -20, axeHealth: -50},
+    {text: "Run away.", nextPass: 19, display: "!book.player.invContains('water') && !book.player.invContains('mushroom')"}]
   ));
   pages.push(new Page(14,
     "A Mysterious Stranger",
