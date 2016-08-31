@@ -255,10 +255,10 @@ function setPages() {
   ));
   pages.push(new Page(14,
     "A Mysterious Stranger",
-    "The stranger accepts your water and in return gives you a map of the area.",
+    "The stranger accepts your water and in return offers you a map of the area.",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Thank the stranger and continue on.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
+    [{text: "Thank the stranger and take the map.", itemPass: ["map"], itemFail: ["map"], nextPass: 15, nextFail: 19, test: "book.player.invContains('compass')"}]
   ));
   pages.push(new Page(15,
     "YOU SURVIVED!",
