@@ -1,7 +1,10 @@
 # The Woods #
 
-#### Written by Katrina Hirsch, Sheena Nickerson, Mark Lawson, & Tim Herold
-#### August 29th - September 1st, 2016
+### Team:
+Katrina Hirsch - Project Manager, Lead Front-End Developer
+Tim Herold - Lead Back-End Developer
+Sheena Nickerson - Developer
+Mark Lawson - Developer
 
 ## Description ##
 
