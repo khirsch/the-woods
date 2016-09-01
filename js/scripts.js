@@ -249,7 +249,7 @@ function setPages() {
     "You explore deeper into the cave and you come to a dead end. On the ground, you find a patch of mushrooms. You pick one up to examine it. It looks odd. What do you do with it?",
     "img/page-icons/cave.svg",
     [{text: "Place the mushroom in your pocket and leave the cave.", nextPass: 10},
-    {text: "Eat the mushroom.", nextFail: 26, gameOverFail: true, itemRemoveFail: ["mushroom"]}]
+    {text: "Eat the mushroom.", test: "false", nextFail: 26, gameOverFail: true, itemRemoveFail: ["mushroom"]}]
   ));
   pages.push(new Page(19,
     "The Woods",
