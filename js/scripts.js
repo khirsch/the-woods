@@ -313,7 +313,7 @@ function setPages() {
   ));
   pages.push(new Page(28,
     "Ghost Attack",
-    "You find the vengeful ghost of a former ranger. The room suddenly feels freezing. Objects fly everywhere. What do you do?",
+    "Upon exploring the lodge, you find a compass and a bottle of water. You also find the vengeful ghost of a former ranger! The room suddenly feels freezing. Objects fly everywhere. What do you do?",
     "img/page-icons/ghost.svg",
     [{text: "Run away.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.8 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
     {text: "Beg for mercy.", nextPass: 36, healthPass: -20}]
