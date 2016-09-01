@@ -574,9 +574,9 @@ $(document).ready(function() {
     $('.book').show();
     $('.bottomLine').show();
     if ($(this).attr('id') === "boy") {
-      $('#profilePic').html("<img src='img/boy.png' alt='Boy'>");
+      $('#profilePic').html("<img src='img/boy.svg' alt='Boy'>");
     } else {
-      $('#profilePic').html("<img src='img/girl.png' alt='Girl'>");
+      $('#profilePic').html("<img src='img/girl.svg' alt='Girl'>");
     }
     changePageInfo();
     $('.title h1').hide();

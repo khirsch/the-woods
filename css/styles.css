@@ -126,6 +126,7 @@ li:hover {
 #boy, #girl {
   position: relative;
   float: left;
+  width: 35%;
   color: #000000;
   background-color: #ffffff;
   font-weight: bold;
@@ -133,7 +134,7 @@ li:hover {
 }
 
 #boy {
-  margin-right: 52px;
+  margin-right: 54px;
 }
 
 #boy:hover, #girl:hover {
