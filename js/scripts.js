@@ -288,7 +288,7 @@ function setPages() {
   ));
   pages.push(new Page(17,
     "Vampire Encounter",
-    "The vampire senses your desperation. He gives you a shiny amulet from around his neck; it looks valuable. You feel safer wearing it. You hear the zombies approaching in the distance. What do you do?",
+    "The vampire senses your desperation. He gives you a shiny amulet from around his neck; it looks valuable. You feel safer wearing it. You hear a zombie approaching in the distance. What do you do?",
     "img/page-icons/vampire.svg",
     false,
     [{text: "Run out of the cave in a panic.", nextPass: 31, nextFail: 10, test: "Math.random() > 0.7 && (book.player.invContains('amulet') || book.player.invContains('compass'))", itemRemovePass: ["amulet", "compass"]},
@@ -352,7 +352,7 @@ function setPages() {
   ));
   pages.push(new Page(25,
     "Zombie Attack",
-    "You have nothing to fight off the zombies with but your own two fists. You try punching a zombie. It does not go well, but you still manage to escape.",
+    "You have nothing to fight off the zombie with but your own two fists. You try punching it. It does not go well, but you still manage to escape.",
     "img/page-icons/woods.svg",
     false,
     [{text: "Keep going.", nextPass: 12}]
