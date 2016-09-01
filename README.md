@@ -1,6 +1,6 @@
 # The Woods #
 
-### Team:
+### Development Team:
 Katrina Hirsch - Project Manager, Lead Front-End Developer
 Tim Herold - Lead Back-End Developer
 Sheena Nickerson - Developer
