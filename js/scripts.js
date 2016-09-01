@@ -23,22 +23,23 @@ function Page (number, subtitle, prompt, img, options) {
   this.subtitle = subtitle;
   this.prompt = prompt;
   this.img = img;
-  this.options = options;
-}
-Page.prototype.setOptions = function() {
-  var newPage = $.extend(true, {}, this)
-  var newOptions = []
-  this.options.forEach(function(option) {
-    var display = true;
-    if (option.display) {
-      display = eval(option.display);
-    }
-    if (display) {
-      newOptions.push(option);
+  Object.defineProperties(this, {
+    "options": {
+      get: function() {
+        var newOptions = []
+        options.forEach(function(option) {
+          var display = true;
+          if (option.display) {
+            display = eval(option.display);
+          }
+          if (display) {
+            newOptions.push(option);
+          }
+        });
+        return newOptions;
+      }
     }
   });
-  newPage.options = newOptions;
-  return newPage;
 }
 function Book (pages) {
   this.pages = pages;
@@ -83,9 +84,9 @@ Book.prototype.loadPage = function(option) {
     this.gameOver = true;
     this.currentPage = this.pages[32];
   } else if (outcome) {
-    this.currentPage = this.pages[option.nextPass].setOptions();
+    this.currentPage = this.pages[option.nextPass];
   } else {
-    this.currentPage = this.pages[option.nextFail].setOptions();
+    this.currentPage = this.pages[option.nextFail];
   }
   if (outcome && option.win) {
     this.win = true;
