@@ -5,11 +5,19 @@ function Player () {
   this.axeHealth = 100;
   this.inv = [];
 }
-
 Player.prototype.invContains = function(item) {
   return this.inv.indexOf(item) >= 0;
 }
-
+Player.prototype.removeItems = function(items) {
+  var inv = this.inv;
+  items.forEach(function(item) {
+    if(inv.indexOf(item) >= 0) {
+      var location = inv.indexOf(item);
+      inv.splice(location, 1);
+    }
+  });
+  this.inv = inv;
+}
 function Page (number, subtitle, prompt, img, gameOverPage, options) {
   this.number = number;
   this.subtitle = subtitle;
@@ -18,102 +26,12 @@ function Page (number, subtitle, prompt, img, gameOverPage, options) {
   this.gameOverPage = gameOverPage;
   this.options = options;
 }
-
-function Book (pages) {
-  this.pages = pages;
-  this.currentPage = pages[0];
-  this.player = new Player();
-  this.gameOver = false;
-  this.startOver = false;
-  this.win = false;
-}
-
-Book.prototype.loadPage = function(option) {
-  var outcome = true;
-  var nextPage;
-  if (option.test) {
-    outcome = eval(option.test);
-  }
-  if(option.gameOver === true) {
-    this.gameOver = true;
-  }
-  if (option.win && outcome) {
-    this.win = true;
-  }
-  if (option.reset) {
-    this.startOver = true;
-  }
-  if (outcome) {
-    if(option.healthPass && book.player.invContains("amulet")) {
-      this.player.health += option.healthPass * 0.5;
-    } else if (option.healthPass) {
-      this.player.health += option.healthPass;
-    }
-    if(option.itemPass) {
-        this.player.inv = this.player.inv.concat(option.itemPass);
-    }
-    if(option.itemRemovePass) {
-      var inv = this.player.inv;
-      option.itemRemovePass.forEach(function(item) {
-        if (inv.indexOf(item) >= 0) {
-          var location = inv.indexOf(item);
-          inv.splice(location, 1);
-        }
-      });
-      this.player.inv = inv;
-    }
-  } else {
-    if(option.healthFail && book.player.invContains("amulet")) {
-      this.player.health += option.healthFail * 0.5;
-    } else if (option.healthFail) {
-      this.player.health += option.healthFail;
-    }
-    if(option.itemRemoveFail) {
-      var inv = this.player.inv;
-      option.itemRemoveFail.forEach(function(item) {
-        if(inv.indexOf(item) >= 0) {
-          var location = inv.indexOf(item);
-          inv.splice(location, 1);
-        }
-      });
-      this.player.inv = inv;
-    }
-    if(option.itemFail) {
-        this.player.inv = this.player.inv.concat(option.itemFail);
-    }
-  }
-  if (option.axeHealth && this.player.invContains("axe")) {
-    this.player.axeHealth += option.axeHealth;
-    if (this.player.axeHealth <= 0) {
-      var location = book.player.inv.indexOf("axe");
-      book.player.inv.splice(location, 1);
-    }
-  }
-  if (this.player.health <= 0) {
-    this.player.alive = false;
-    this.gameOver = true;
-  }
-  if (this.gameOver && this.player.alive) {
-    nextPage = this.pages[4];
-  } else if (outcome) {
-    nextPage = this.getPage(this.pages[option.nextPass]);
-  } else {
-    nextPage = this.getPage(this.pages[option.nextFail]);
-  }
-  if (this.player.health <= 0 && nextPage.gameOverPage) {
-    this.currentPage = nextPage;
-  } else if (this.player.health <= 0) {
-    this.currentPage = this.pages[32];
-  } else {
-    this.currentPage = nextPage;
-  }
-}
-Book.prototype.getPage = function(page) {
-  var newPage = $.extend(true, {}, page)
+Page.prototype.setOptions = function() {
+  var newPage = $.extend(true, {}, this)
   var newOptions = []
-  page.options.forEach(function(option) {
+  this.options.forEach(function(option) {
     var display = true;
-    if(option.display) {
+    if (option.display) {
       display = eval(option.display);
     }
     if (display) {
@@ -123,6 +41,63 @@ Book.prototype.getPage = function(page) {
   newPage.options = newOptions;
   return newPage;
 }
+function Book (pages) {
+  this.pages = pages;
+  this.currentPage = pages[0];
+  this.player = new Player();
+  this.gameOver = false;
+  this.startOver = false;
+  this.win = false;
+}
+Book.prototype.loadPage = function(option) {
+  var outcome = true;
+  var nextPage;
+  if (option.test) {
+    outcome = eval(option.test);
+  }
+  if (outcome && option.healthPass && this.player.invContains("amulet")) {
+    this.player.health += option.healthPass * 0.5;
+  } else if (outcome && option.healthPass) {
+    this.player.health += option.healthPass;
+  } else if (!outcome && option.healFail && this.player.invContains("amulet")) {
+    this.player.health += option.healthFail * 0.5;
+  } else if (!outcome && option.healFail) {
+    this.player.health += option.healthFail;
+  }
+  if (outcome && option.itemPass) {
+      this.player.inv = this.player.inv.concat(option.itemPass);
+  } else if (!outcome && option.itemFail) {
+      this.player.inv = this.player.inv.concat(option.itemFail);
+  }
+  if(outcome && option.itemRemovePass) {
+    this.player.removeItems(option.itemRemovePass);
+  } else if (!outcome && option.itemRemoveFail) {
+    this.player.removeItems(option.itemRemoveFail);
+  }
+  if (option.axeHealth && this.player.invContains("axe")) {
+    this.player.axeHealth += option.axeHealth;
+    if (this.player.axeHealth <= 0) {
+      this.player.removeItems(['axe']);
+    }
+  }
+  if (this.player.health <= 0) {
+    this.player.alive = false;
+    this.gameOver = true;
+    this.currentPage = this.pages[32];
+  } else if (outcome) {
+    this.currentPage = this.pages[option.nextPass].setOptions();
+  } else {
+    this.currentPage = this.pages[option.nextFail].setOptions();
+  }
+  if (outcome && option.win) {
+    this.win = true;
+  } else if (!outcome && option.gameOverFail) {
+    this.gameOver = true;
+    book.player.health = 0;
+  } else if (option.reset) {
+    this.startOver = true;
+  }
+}
 Book.prototype.reset = function() {
   this.currentPage = this.pages[0];
   this.player = new Player();
@@ -131,7 +106,6 @@ Book.prototype.reset = function() {
   this.startOver = false;
   this.win = false;
 }
-
 function setPages() {
   var owlPages = [];
   owlPages.push(new Page(8,
@@ -160,7 +134,6 @@ function setPages() {
   ));
   var rand = Math.round(Math.random()*2);
   var owlPage = owlPages[rand];
-
   var pages = [];
   pages.push(new Page(0,
     "Zombie Attack",
@@ -168,14 +141,14 @@ function setPages() {
     "img/page-icons/zombie.svg",
     false,
     [{text: "Run away!", nextPass: 1},
-    {text: "Play dead.", nextPass: 2, healthPass: -1000}]
+    {text: "Play dead.", nextFail: 2, test: "false", gameOverFail: true}]
   ));
   pages.push(new Page(1,
     "The Woods",
     "You run into the woods and soon realize that you've lost your sense of direction. Now what?",
     "img/page-icons/woods.svg",
     false,
-    [{text: "Try to find your way back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", healthFail: -1000},
+    [{text: "Try to find your way back to camp.", nextPass: 7, nextFail: 27, test: "Math.random() > 0.5", gameOverFail: true},
     {text: "Keep running.", nextPass: 3}]
   ));
   pages.push(new Page(2,
@@ -205,7 +178,7 @@ function setPages() {
     "Upon entering the cave, you see a shrouded figure standing in the dark depths. He welcomes you in an alluring voice, and you can't help but notice his sharp fangs as he speaks. He's a vampire!",
     "img/page-icons/cave.svg",
     false,
-    [{text: "Attack him.", nextPass: 6, nextFail: 39, test: "book.player.invContains('axe')", healthPass: -50, healthFail: -1000, axeHealth: -50},
+    [{text: "Attack him.", nextPass: 6, nextFail: 39, test: "book.player.invContains('axe')", healthPass: -50, gameOverFail: true, axeHealth: -50},
     {text: "Strike up a conversation.", nextPass: 17, itemPass: ["amulet"]}]
   ));
   pages.push(new Page(6,
@@ -238,7 +211,7 @@ function setPages() {
     "img/page-icons/zombie.svg",
     false,
     [{text: "Defend yourself.", test: "book.player.invContains('axe')", nextPass: 16, nextFail: 25, healthPass: -30, healthFail: -60, axeHealth: -50},
-    {text: "Cower in fear.", nextPass: 32, healthPass: -1000}]
+    {text: "Cower in fear.", nextFail: 32, test: "false", gameOverFail: true}]
   ));
   pages.push(new Page(11,
     "YOU SURVIVED!",
@@ -300,7 +273,7 @@ function setPages() {
     "img/page-icons/cave.svg",
     false,
     [{text: "Place the mushroom in your pocket and leave the cave.", nextPass: 10},
-    {text: "Eat the mushroom.", nextPass: 26, healthPass: -1000, itemRemovePass: ["mushroom"]}]
+    {text: "Eat the mushroom.", nextFail: 26, gameOverFail: true, itemRemoveFail: ["mushroom"]}]
   ));
   pages.push(new Page(19,
     "The Woods",
@@ -308,7 +281,7 @@ function setPages() {
     "img/page-icons/woods.svg",
     false,
     [{text: "Try to use the knife to free yourself from the bear trap.", display: "book.player.invContains('knife')", nextPass: 23},
-    {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, healthFail: -1000, win: true}]
+    {text: "Wait and hope someone finds you.", test: "Math.random() > 0.8", nextPass: 30, nextFail: 29, gameOverFail: true, win: true}]
   ));
   pages.push(new Page(20,
     "A Mysterious Stranger",
@@ -332,7 +305,7 @@ function setPages() {
     "img/page-icons/person.svg",
     false,
     [{text: "Run away.", nextPass: 19},
-    {text: "Stand your ground.", nextPass: 33, healthPass: -1000}]
+    {text: "Stand your ground.", nextFail: 33, test: "false", gameOverFail: true}]
   ));
   pages.push(new Page(23,
     "The Woods",
@@ -471,7 +444,7 @@ function setPages() {
     "Following the sound, you find a waterfall. You glimpse an alcove beyond the falls.",
     "img/page-icons/waterfall.svg",
     true,
-    [{text: "Explore the alcove.", nextPass: 43, healthPass: -1000},
+    [{text: "Explore the alcove.", nextFail: 43, test: "false", gameOverFail: true},
     {text: "Follow the stream.", nextPass: 44, win: true}]
   ));
   pages.push(new Page(42,
@@ -569,7 +542,6 @@ $(document).ready(function() {
     }
   }
   $('.start').click(function() {
-    // $('hr').show();
     $('.title').hide();
     $('.book').show();
     $('.bottomLine').show();
