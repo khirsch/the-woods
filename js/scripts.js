@@ -1,6 +1,5 @@
 // Back end logic
 function Player () {
-  this.alive = true;
   this.health = 100;
   this.axeHealth = 100;
   this.inv = [];
@@ -80,7 +79,6 @@ Book.prototype.loadPage = function(option) {
     }
   }
   if (this.player.health <= 0) {
-    this.player.alive = false;
     this.gameOver = true;
     this.currentPage = this.pages[32];
   } else if (outcome) {
