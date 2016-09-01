@@ -1,6 +1,7 @@
 body {
   background: url("../img/woods.jpg") no-repeat center center fixed;
   background-size: cover;
+  transition: background 1.5s linear;
   font-family: 'Titillium Web', sans-serif;
   font-size: 16px;
   color: #000000;
