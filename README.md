@@ -5,7 +5,7 @@
 
 ## Description ##
 
-The Woods is an interactive story with multiple endings. The reader's ending is determined by the choices they make while progressing through the story. Javascript calculates the outcome based on conditions attached to their choices. These conditions are either determined randomly or based on the reader's health or inventory items.
+The Woods is an interactive story with multiple endings. The the story changes depending on the choices made by the reader while they progress through the story. Javascript calculates the outcome based on conditions attached to their choices. These conditions are either determined randomly or based on the reader's health or inventory items.
 
 ## Specifications ##
 
