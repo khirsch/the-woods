@@ -1,6 +1,4 @@
 body {
-  background: url("../img/woods.jpg") no-repeat center center fixed;
-  background-size: cover;
   transition: background 1.5s linear;
   font-family: 'Titillium Web', sans-serif;
   font-size: 16px;
@@ -41,6 +39,21 @@ li:hover {
   color: #718059;
 }
 
+.backgroundStart {
+  background: url("../img/woods.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.backgroundWin {
+  background: url("../img/sunrise.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.backgroundLose {
+  background: url("../img/graveyard.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 .container {
   display: block;
   margin: 10% auto;
@@ -72,6 +85,10 @@ li:hover {
   position: relative;
   float: left;
   overflow-y: auto;
+}
+
+.axeBroken {
+  opacity: 0.3;
 }
 
 .book hr {
