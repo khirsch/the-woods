@@ -5,7 +5,7 @@
 
 ## Description ##
 
-The Woods is an interactive story with multiple endings. The reader's ending is determined by the choices they make while progressing through the story.
+The Woods is an interactive story with multiple endings. The reader's ending is determined by the choices they make while progressing through the story. Javascript calculates the outcome based on conditions attached to their choices. These conditions are either determined randomly or based on the reader's health or inventory items.
 
 ## Specifications ##
 
@@ -43,13 +43,13 @@ The Woods is an interactive story with multiple endings. The reader's ending is 
 
 ## Setup/Installation Instructions ##
 
-* Copy the repository from [GitHub](https://github.com/khirsch/adventure/)
+* Copy the repository from [GitHub](https://github.com/khirsch/the-woods/)
 * Open the index.html file in a browser window
 * Open the console to confirm that JavaScript and jQuery are running (In Chrome, navigate to Menu > More Tools > Developer Tools > Console)
 
 ## GitHub Pages ##
 
-This application can be viewed on GitHub Pages [here](https://khirsch.github.io/adventure/).
+This application can be viewed on GitHub Pages [here](https://khirsch.github.io/the-woods/).
 
 ## Known Bugs ##
 
